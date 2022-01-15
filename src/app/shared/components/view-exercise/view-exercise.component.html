@@ -1,0 +1,31 @@
+<dx-popup [minWidth]='"55%"' [minHeight]="'90%'" [showTitle]="true" [title]="title" [dragEnabled]="true"
+          [closeOnOutsideClick]="true" [(visible)]="isVisible" [position]="{ my: 'center', at: 'center' }">
+  <div *dxTemplate="let data of 'content'">
+
+<!--    <video width="400" controls preload="auto" >-->
+<!--      <source src="http://localhost:8080/video/stream/mp4/toystory" type="video/mp4">-->
+<!--      Your browser does not support HTML video.-->
+<!--    </video>-->
+    <dx-scroll-view width="100%" height="100%">
+
+      <div class="row-md-6 align-items-center">
+        <app-exercise-media-carousel-component [dataSource]="exerciseVideoListPrepared"></app-exercise-media-carousel-component>
+      </div>
+      <p class="content-title" >
+        Egzersiz Hakkında Bilgi:
+      </p>
+      <div class="row-md-6 align-items-center" style="margin-top:5px">
+        <dx-text-area
+          title=""
+          [readOnly]="true"
+          [height]="90"
+          [stylingMode]="stylingMode"
+          [(value)]="exercise.exerciseContent">
+        </dx-text-area>
+      </div>
+    </dx-scroll-view>
+
+  </div>
+
+
+</dx-popup>

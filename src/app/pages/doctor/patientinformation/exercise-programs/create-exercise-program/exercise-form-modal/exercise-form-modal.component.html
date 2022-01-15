@@ -1,0 +1,40 @@
+
+<div class="col-xs-12">
+
+  <dx-popup [height]="'400px'" [width]="'700px'" [showTitle]="true" [title]="_showedExerciseDate+' Programı'" [dragEnabled]="true"
+            [closeOnOutsideClick]="true" [(visible)]="isVisible" [position]="{ my: 'center', at: 'center' }" [resizeEnabled]="true">
+    <div *dxTemplate="let data of 'content'">
+
+      <dx-scroll-view width="100%" height="100%">
+        <div class="dx-field">
+          <div class="dx-field-label">Egzersizler:</div>
+          <div class="dx-field-value">
+            <dx-tag-box [dataSource]="exercisesTagBoxes" [(value)]="selectedExercises"
+                        [searchEnabled]="true" displayExpr="exerciseName" valueExpr="id">
+
+            </dx-tag-box>
+          </div>
+        </div>
+      </dx-scroll-view>
+    </div>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="cancelButtonOption">
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="submitButtonOption">
+    </dxi-toolbar-item>
+
+
+  </dx-popup>
+
+</div>

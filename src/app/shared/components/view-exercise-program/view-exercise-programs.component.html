@@ -1,0 +1,135 @@
+
+<dx-popup
+  [width]="width"
+  [height]="'98%'"
+  [showTitle]="true"
+  [title]="'Egzersiz Programı'"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="isVisible"
+  [resizeEnabled]="true">
+
+  <dx-scroll-view width="100%" height="98%" padding="2px">
+    <dx-tab-panel
+      [height]="'100%'"
+      [selectedIndex]="1"
+      [loop]="false"
+      [animationEnabled]="true"
+      [swipeEnabled]="false"
+    >
+      <dxi-item title="Program" style="background-color: white">
+        <div style="padding: 1%; margin-top: 5px;margin-left: 20px;margin-right: 20px; background-color: white; border-radius:3px;" >
+
+          <!-- [views]="views"-->
+          <!-- Scheduler  -->
+          <dx-scheduler
+            timeZone="America/Los_Angeles"
+            [dataSource]="scheduledExerciseList"
+            currentView="Numeric Mode"
+            [currentDate]="now"
+            [height]="600"
+            dataCellTemplate="dataCellTemplate"
+            (onCellClick)="onExerciseProgramFormOpening($event)"
+            (onAppointmentClick)="cancelOnAppointmentFormOpening($event)"
+            (onAppointmentDblClick)="cancelOnAppointmentFormOpening($event)"
+            (onAppointmentFormOpening)="cancelOnAppointmentFormOpening($event)"
+            [textExpr]="'exerciseName'">
+            <dxo-editing #editingOptions
+                         [allowAdding]="false"
+                         [allowDeleting]="false"
+                         [allowUpdating]="false"
+                         [allowResizing]="false"
+                         [allowDragging]="false"
+            ></dxo-editing>
+            <dxi-view
+              [hidden]="true"
+              name="Numeric Mode"
+              type="month"
+              [maxAppointmentsPerCell]="2">
+            </dxi-view>
+            <dxi-resource
+              fieldExpr="isApplied"
+              label="Yapıldı mı?"
+              [dataSource]="resourcesData"
+            ></dxi-resource>
+
+            <div *dxTemplate="let dataCell of 'dataCellTemplate'"
+                 [ngClass]="{
+                  'disable-date': isDateOutOfRange(dataCell.startDate, startDate, endDate),
+                  'dinner': false
+                }">
+              {{dataCell.text}}
+            </div>
+          </dx-scheduler>
+          <b>
+
+            <ng-template [ngIf]="isPatient">
+              <p>
+                *Egzersizleri görüntülemek için ilgili güne çift tıklayın.
+              </p>
+            </ng-template>
+            <ng-template [ngIf]="!isPatient">
+              <p>
+                *Kırmızılar, hastanın henüz tamamlamadığı egzersizleri gösterir.
+              </p>
+            </ng-template>
+          </b>
+        </div>
+      </dxi-item>
+
+      <dxi-item title="Program Bilgileri" style="background-color: white">
+        <div style="padding: 1%; margin-top: 5px;margin-left: 20px;margin-right: 20px; background-color: white; border-radius:3px;">
+
+          <div class="dx-fieldset">
+            <div class="dx-field">
+              <div class="dx-field-label">Başlangıç Tarihi</div>
+              <div class="dx-field-value">
+                <dx-date-box [disabled]="true" [(value)]="startDate" type="date">
+                </dx-date-box>
+              </div>
+            </div>
+            <div class="dx-field">
+              <div class="dx-field-label">Bitiş Tarihi</div>
+              <div class="dx-field-value">
+                <dx-date-box [disabled]="true" [(value)]="endDate" type="date">
+                </dx-date-box>
+              </div>
+            </div>
+            <div class="dx-field">
+              <div class="dx-field-label">Programın Amacı</div>
+              <div class="dx-field-value">
+                <dx-text-area
+                  [disabled]="true"
+                  placeholder="Program sonunda elde edinmesi beklenen kazanımların ne olduğunu açıklayınız"
+                  [(value)]="goal"
+                  [maxLength]="1000">
+                </dx-text-area>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </dxi-item>
+
+    </dx-tab-panel>
+
+
+
+
+
+  </dx-scroll-view>
+
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="cancelButtonOption">
+    </dxi-toolbar-item>
+
+</dx-popup>
+
+
+
+<app-view-exercise-list-component #viewExerciseListComponent [exerciseDate]="selectedDate" (getPhysioteraphyProgram)="submitScheduledExercisesClicked()"></app-view-exercise-list-component>

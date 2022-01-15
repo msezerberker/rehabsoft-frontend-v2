@@ -1,0 +1,565 @@
+
+
+<div id="pdfTable"  id="content">
+  <dx-button icon="save"
+             text="PDF Olarak İndir"
+             (onClick)="downloadPdf()">
+  </dx-button>
+
+  <div class="container" id="video-grid">
+
+
+    <div class="card-body" style="padding: 2px; background-color: #9EE2E9;">
+
+      <dx-toolbar style="padding: 2px; background-color: #9EE2E9;">
+
+        <dxi-item location="center" widget="dxButton" locateInMenu="never">
+          <div *dxTemplate>
+            <div class='toolbar-label'><b>GENEL DEĞERLENDİRME FORMU</b> </div>
+          </div>
+        </dxi-item>
+      </dx-toolbar>
+    </div>
+
+
+
+    <dx-form [formData]="generalEvaluationForm" [readOnly]="true">
+
+      <!-- 1. Demografik Bilgiler-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="1. Demografik Bilgiler" [colCount]="2">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="gender" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Cinsiyet"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="birthDate" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Doğum Tarihi"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="ageAsMonth" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Yaş(Ay olarak)"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="numberOfSiblings" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Kardeş Sayısı"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="whichChild" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Kaçıncı Çocuk?"></dxo-label>
+          </dxi-item>
+
+
+          <dxi-item [alignItemLabels]="true" itemType="group">
+            <div style="width: 50%"></div>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <div style="width: 50%"></div>
+        </dxi-item>
+
+
+        <!--End of first part-->
+      </dxi-item>
+
+
+      <!--2. Fiziksel Özellikler-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="2. Fiziksel Özellikler" [colCount]="2">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+
+          <dxi-item dataField="heightCm" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Boy(cm olarak)"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="weightGr" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Kilo(gr)"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="headRoundCm" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Baş çevresi (cm)"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <div style="width: 50%"></div>
+        </dxi-item>
+
+      </dxi-item>
+
+
+
+      <!--3. Doğum Öncesi Özellikler-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="3. Doğum Öncesi Özellikler" [colCount]="2">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <!--Left Side-->
+          <dxi-item dataField="mothersGivenBirthAgeYear" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Annenin Doğumdaki Yaşı"></dxo-label>
+          </dxi-item>
+          <dxi-item dataField="mothersEducationLevel" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Annenin Eğitim Seviyesi"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="fathersEducationLevel" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Babanın Eğitim Seviyesi"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="typeOfPregnancy" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Gebelik Türü"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+
+
+        <!--Right group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+
+          <dxi-item [alignItemLabels]="true" itemType="group">
+            <dxi-item dataField="multiplePregnancy" editorType="dxRadioGroup">
+              <dxo-label location="top" [visible]="true" text="Çoğul Gebelik"></dxo-label>
+            </dxi-item>
+          </dxi-item>
+
+
+          <dxi-item dataField="diseaseOfMotherPregnancy.diseaseName" editorType="dxTextArea">
+            <dxo-label location="top" [visible]="true" text="Hamilelikte Geçirilen Hastalık"></dxo-label>
+          </dxi-item>
+
+
+          <dxi-item dataField="isRelativeMarriage" editorType="dxRadioGroup" [editorOptions]="isRelativeMarriageOption">
+            <dxo-label location="top" text="Akraba Evliliği"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isBloodIncompatibility" editorType="dxRadioGroup"
+            [editorOptions]="isBloodIncompatibilityOption">
+            <dxo-label location="top" text="Kan uyuşmazlığı"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+
+
+
+
+
+
+
+      <!--4. Doğum Özellikleri-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="4. Doğum Özellikleri" [colCount]="2">
+
+        <!--Left group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="birthWeek" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Doğum Haftası"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="birthType" editorType="dxSelectBox" [editorOptions]="{
+    dataSource: birthTypeSelectBoxList, valueExpr: 'value', displayExpr: 'name'}">
+            <dxo-label location="top" [visible]="true" text="Doğum Şekli"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="birthWeight" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Doğum Kilosu (gr)"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="birthHeadAroundCm" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Doğumda Baş Çevresi (cm)"></dxo-label>
+          </dxi-item>
+
+
+          <dxi-item dataField="pregnancyInfectionInfo" editorType="dxTextArea">
+            <dxo-label location="top" [visible]="true" text="Hamilelikte enfeksiyon var ise açıklaması"></dxo-label>
+          </dxi-item>
+
+
+
+          <dxi-item dataField="pregnancyMedicineUsageInfo" editorType="dxTextArea"
+            [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 100}">
+            <dxo-label location="top" [visible]="true" text="Hamilelikte ilaç kullanımı var ise açıklaması">
+            </dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <!--End Left group-->
+
+
+
+        <!-- Right group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="apgarScore" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Apgar Puanı"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isBirthAnoxia" editorType="dxRadioGroup" [editorOptions]="isBirthAnoxiaOption">
+            <dxo-label location="top" [visible]="true" text="Doğumda oksijensiz kalma"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isBirthEmpurpling" editorType="dxRadioGroup" [editorOptions]="isBirthEmpurplingOption">
+            <dxo-label location="top" [visible]="true" text="Doğumda morarma"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isBirthCrying" editorType="dxRadioGroup" [editorOptions]="isBirthCryingOption">
+            <dxo-label location="top" [visible]="true" text="Doğumda ağlama"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isHighBloodPressorPregnancy" editorType="dxRadioGroup"
+            [editorOptions]="isHighBloodPressorPregnancyOption">
+            <dxo-label location="top" [visible]="true" text="Gebelikte yüksek tansiyon"></dxo-label>
+          </dxi-item>
+
+
+          <dxi-item dataField="isPregnancyDrinking" editorType="dxRadioGroup"
+            [editorOptions]="isPregnancyDrinkingOption">
+            <dxo-label location="top" [visible]="true" text="Gebelikte Alkol Kullanımı"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isPregnanycSmoking" editorType="dxRadioGroup" [editorOptions]="isPregnancySmokingOption">
+            <dxo-label location="top" [visible]="true" text="Gebelikte Sigara Kullanımı"></dxo-label>
+          </dxi-item>
+
+
+          <!--Sağ grup son-->
+        </dxi-item>
+      </dxi-item>
+
+
+
+      <!--Doğum Sonrası Özellikleri-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="5. Doğum Sonrası Özellikleri" [colCount]="2">
+
+        <!--Left group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="intensiveCare" editorType="dxNumberBox">
+            <dxo-label location="top" [visible]="true" text="Eğer kaldı ise Yoğun bakım/kuvöz gün sayısı">
+            </dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="oxygenSupport" editorType="dxRadioGroup" [editorOptions]="oxygenSupportOption">
+            <dxo-label location="top" [visible]="true" text="Oksijen desteği"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isNewbornRetinopathy" editorType="dxRadioGroup"
+            [editorOptions]="newbornRetinopathyOption">
+            <dxo-label location="top" [visible]="true" text="Yenidoğan retinopatisi (ROP)"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isHypoglycaemia" editorType="dxRadioGroup" [editorOptions]="isHypoglycaemiaOption">
+            <dxo-label location="top" [visible]="true" text="Hipoglisemi"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+        <!--End Left group-->
+
+
+        <!--Right group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="isRespiratuvarDistressSyndrom" editorType="dxRadioGroup"
+            [editorOptions]="isRespiratuvarDistressSyndromOption">
+            <dxo-label location="top" [visible]="true" text="Respiratuvar Distres Sendromu"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isBronchopulmonaryDysplasia" editorType="dxRadioGroup"
+            [editorOptions]="isBronchopulmonaryDysplasiaOption">
+            <dxo-label location="top" [visible]="true" text="Bronkopulmoner Displazi"></dxo-label>
+          </dxi-item>
+
+          <dxi-item itemType="group" caption="Yenidoğan sarılığı (Hiperbilirubinemi) Hakkında Bilgiler">
+            <dxi-item dataField="hyperbilirubinemia.hospitalDayTime" editorType="dxNumberBox"
+              [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:10000, showSpinButtons:true}">
+              <dxo-label [visible]="true" location="top" [text]="'Yenidoğan sarılığı için kaç gün hastanede yattı?'">
+              </dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="hyperbilirubinemia.isPhototeraphy" editorType="dxRadioGroup"
+              [editorOptions]="isPhototeraphyOption">
+              <dxo-label [visible]="true" location="top" text="Işık tedavisi aldı mı?"></dxo-label>
+            </dxi-item>
+          </dxi-item>
+
+
+          <!--End of Right group-->
+        </dxi-item>
+      </dxi-item>
+
+
+
+
+      <!--6. Doğum Sonrası Sonrası Serebral Palsi Nedeni-->
+      <!--6. Doğum Sonrası Sonrası Serebral Palsi Nedeni-->
+      <dxi-item [alignItemLabels]="true" itemType="group"
+        caption="6. Doğum Sonrası Sonrası Serebral Palsi Nedeni (doğumdan 28 gün sonra oluşan durumlar)" [colCount]="1">
+
+        <dxi-item [visible]="true" dataField="afterBirthReasonCerebralPalsy.cause" editorType="dxTextBox">
+          <dxo-label location="top" [visible]="true" text="Varsa Nedeni"></dxo-label>
+        </dxi-item>
+
+        <dxi-item [visible]="true" dataField="afterBirthReasonCerebralPalsy.causeInfo" editorType="dxTextArea">
+          <dxo-label location="top" [visible]="true" text="Travma Açıklaması"></dxo-label>
+        </dxi-item>
+        <dxi-item dataField="afterBirthReasonCerebralPalsy.occuringMonth" editorType="dxNumberBox">
+          <dxo-label location="top" [visible]="true" text="Oluşma zamanı (ay)"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+
+      <!--7. Uygulanan Tedaviler-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="7. Uygulanan Tedaviler">
+
+
+        <dxi-item itemType="group" caption="Botoks Tedavisi">
+
+          <dxi-item
+            dataField="isBotoxTreatment"
+            editorType="dxRadioGroup"
+            [editorOptions]="{dataSource:[{name:'Oldu', value: true},{name:'Hiç olmadı', value: false}], valueExpr: 'value', displayExpr: 'name',layout:'horizontal'}">
+            <dxo-label location="top" [visible]="true" text="Botilinum toksin (Botox) enjeksiyonu oldu mu?"></dxo-label>
+          </dxi-item>
+
+          <dxi-item [visible]="generalEvaluationForm.isBotoxTreatment" dataField="botoxTreatment.lastBotoxDate" editorType="dxDateBox">
+            <dxo-label location="top"  text="Son botoksun uygulanma tarihi(eğer Uygulandı ise)">
+            </dxo-label>
+          </dxi-item>
+
+          <dxi-item itemType="group" [colCount]="2">
+            <dxi-item itemType="group">
+              <dxo-label location="top" text="Botoks Resmi" [visible]="generalEvaluationForm.isBotoxTreatment" ></dxo-label>
+
+              <dxi-item [template]="'buttonTemplate'"  >
+              </dxi-item>
+              <div *dxTemplate="let data of 'buttonTemplate'" >
+                <div class="float-left" style="margin-right: 15px" [hidden]="!generalEvaluationForm.isBotoxTreatment">
+                  <dx-button text="Resmi Aç" icon="fas fa-eye" type="normal" (onClick)="showBotoxImage()">
+                  </dx-button>
+                </div>
+                <div class="float-left" style="margin-top: 2px" [hidden]="!generalEvaluationForm.isBotoxTreatment">
+                  <a [href]="botoxImageFileUrl" [download]="botoxImageFileName">
+                    <span class="fas fa-download fa-2x"></span>
+                  </a>
+                </div>
+                <div [hidden]="!generalEvaluationForm.isBotoxTreatment">
+                  <p> Hasta resim yüklemedi </p>
+                </div>
+              </div>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item itemType="group" editorType="dxRadioGroup" caption="Uygulanan Cerrahiler">
+          <dxi-item [template]="'appliedSurgeryDataGrid'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'appliedSurgeryDataGrid'">
+            <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+              <app-applied-surgery-data-grid
+                [appliedSurgeryCollection]="generalEvaluationForm.appliedSurgeryCollection">
+              </app-applied-surgery-data-grid>
+            </ng-container>
+          </div>
+        </dxi-item>
+
+        <dxi-item itemType="group" editorType="dxRadioGroup" caption="Kullanılan Ortezler">
+          <dxi-item [template]="'orthesisInfoDataGrid'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'orthesisInfoDataGrid'">
+            <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+              <app-orthesis-info-data-grid [orthesisInfoCollection]="generalEvaluationForm.orthesisInfoCollection">
+              </app-orthesis-info-data-grid>
+            </ng-container>
+          </div>
+        </dxi-item>
+
+        <dxi-item itemType="group" editorType="dxRadioGroup" caption="Kullanılan Diğer Ortezler">
+          <dxi-item [template]="'otherOrthesisInfoDataGrid'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'otherOrthesisInfoDataGrid'">
+            <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+              <app-other-orthesis-info-data-grid
+                [otherOrthesisInfoCollection]="generalEvaluationForm.otherOrthesisInfoCollection">
+              </app-other-orthesis-info-data-grid>
+            </ng-container>
+          </div>
+        </dxi-item>
+
+        <dxi-item itemType="group" editorType="dxRadioGroup" caption="Kullanılan İlaçlar">
+          <dxi-item [template]="'usedMedicineList'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'usedMedicineList'">
+            <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+              <div class="list-container">
+                <dx-list [items]="generalEvaluationForm.usedMedicineCollection" [showSelectionControls]="true"
+                  [keyExpr]="'id'" [displayExpr]="'medicineName'">
+                </dx-list>
+              </div>
+            </ng-container>
+          </div>
+        </dxi-item>
+
+      </dxi-item>
+
+
+
+
+      <!--8. Eşlik Eden Problemler:-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="8. Uygulanan Tedaviler">
+        <!--Left group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+
+          <dxi-item dataField="isVisualImpairment" editorType="dxRadioGroup" [editorOptions]="isVisualImpairmentOption">
+            <dxo-label location="top" [visible]="true" text="Görme Problemi var mı?"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="visualimpairment.information" editorType="dxTextArea"
+            [visible]="generalEvaluationForm.isVisualImpairment"
+            [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 80}">
+            <dxo-label location="top" [visible]="true" text="Görme probleminin ne olduğunu yazınız"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="isHearingImpairment" editorType="dxRadioGroup"
+            [editorOptions]="isHearingImpairmentOption">
+            <dxo-label location="top" [visible]="true" text="Duyma Problemi var mı?"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="hearingImpairment.isUseHearingAid" [visible]="generalEvaluationForm.isHearingImpairment"
+            editorType="dxRadioGroup" [editorOptions]="isHearingAidOption">
+            <dxo-label location="top" [visible]="true" text="İşitme cihazı kullanıyor mu"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="epilepsy.epilepsySituation" editorType="dxTextBox">
+            <dxo-label location="top" [visible]="true" text="Epilepsi"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+        <!--Right group-->
+        <dxi-item itemType="group">
+
+          <dxi-item itemType="group">
+            <dxi-item [template]="'coexistingDiseaseTitleTemplate'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'coexistingDiseaseTitleTemplate'">
+              <p style="color:#728e94">
+                Diğer Rahatsızlıklar:
+              </p>
+            </div>
+          </dxi-item>
+
+          <dxi-item itemType="group">
+            <dxi-item [template]="'coexistingDiseaseList'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'coexistingDiseaseList'">
+              <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+                <div class="list-container">
+                  <dx-list [items]="generalEvaluationForm.coexistingDiseasesCollection" [showSelectionControls]="true"
+                    [keyExpr]="'id'" [displayExpr]="'diseaseName'">
+                  </dx-list>
+                </div>
+              </ng-container>
+            </div>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+
+
+      <!--9. Aldığı Terapiler Hakkında:-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="9. Aldığı Terapiler Hakkında">
+        <!--Left group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item dataField="isPhysiotherapyPast" editorType="dxRadioGroup"
+            [editorOptions]="isPhysiotherapyPastOption">
+            <dxo-label location="top" [visible]="true" text="Fizyoterapi"></dxo-label>
+          </dxi-item>
+
+          <dxi-item dataField="physiotherapyPast.numberOfWeeklySession" editorType="dxNumberBox"
+            [visible]="generalEvaluationForm.isPhysiotherapyPast"
+            [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:1000, showSpinButtons:true}">
+            <dxo-label location="top" [visible]="true" text="Haftalık seans sayısı"></dxo-label>
+          </dxi-item>
+
+          <dxi-item [alignItemLabels]="true" itemType="group" [visible]="generalEvaluationForm.isPhysiotherapyPast">
+            <dxi-item [template]="'ftrtitleTemplate'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'ftrtitleTemplate'">
+              <p style="color:#728e94">
+                Hangi FTR Merkezleri:
+              </p>
+            </div>
+          </dxi-item>
+
+          <dxi-item itemType="group" colCount="2">
+            <dxi-item [template]="'physioteraphyCenterList'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'physioteraphyCenterList'">
+              <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+                <div class="list-container">
+                  <dx-list [items]="generalEvaluationForm.physiotherapyPast.physiotherapyCentralCollection"
+                    [showSelectionControls]="true" [keyExpr]="'id'" [displayExpr]="'physiotherapyCentralName'">
+                  </dx-list>
+                </div>
+              </ng-container>
+            </div>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+
+
+
+      <!--10. Programdan beklentiler-->
+      <dxi-item [alignItemLabels]="true" itemType="group" caption="10. Programdan Beklentiler">
+        <!--Left group-->
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item itemType="group" colCount="2">
+            <dxi-item [template]="'expectationsList'">
+            </dxi-item>
+            <div *dxTemplate="let data of 'expectationsList'">
+              <ng-container *ngIf="isGeneralEvaluationFormLoaded">
+
+                <div class="list-container">
+                  <dx-scroll-view width="100%" height="100%">
+                    <div class="list-group">
+                      <a class="list-group-item list-group-item-action flex-column align-items-start"
+                        *ngFor="let expectation of generalEvaluationForm.expectationsAboutProgramCollection">
+                        <p class="mb-1"
+                          style="display: list-item; list-style-type: disc; list-style-position: inside; color: black">
+                          {{expectation.expectationContent}}
+                        </p>
+                      </a>
+                    </div>
+                  </dx-scroll-view>
+                </div>
+
+              </ng-container>
+            </div>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+
+
+    </dx-form>
+
+
+  </div>
+</div>
+<!--
+<div>
+<dx-list [items]="generalEvaluationForm.orthesisInfoCollection">
+    <div *dxTemplate="let item of 'item'">
+        <div>{{item.orthesisName}}</div>
+        <div >Sol ayak: {{item.leftPart}}</div>
+        <div >Sağ ayak: {{item.rightPart}}</div>
+    </div>
+</dx-list>
+
+</div> --->
+
+
+<dx-popup  [width]='"100%"' [height]="'100%'" [showTitle]="true" [title]="title" [dragEnabled]="true" [resizeEnabled]="true"
+           [closeOnOutsideClick]="true" [(visible)]="isImagePopUpVisible" [position]="'top'">
+  <div *dxTemplate="let data of 'content'">
+    <app-asyn-image-component [src]="imageUrlToDownload"></app-asyn-image-component>
+  </div>
+</dx-popup>

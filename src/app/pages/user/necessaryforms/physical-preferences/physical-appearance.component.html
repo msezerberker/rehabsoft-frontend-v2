@@ -1,0 +1,50 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--3. Fiziksel Özellikler-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="3. Fiziksel Özellikler" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+      <dxi-item dataField="heightCm" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:10, max:2147483647, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Boy gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Boy (cm)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="weightGr" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '(örn. 7300 gram)', min:1000, max:2147483, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Kilo gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Kilo (gr)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="headRoundCm" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:5, max:2147483, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Baş çevresi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Baş çevresi (cm)"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <div style="width: 50%"></div>
+    </dxi-item>
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

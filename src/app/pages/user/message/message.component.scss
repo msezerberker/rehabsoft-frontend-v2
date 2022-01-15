@@ -1,0 +1,73 @@
+$green: #86BB71;
+$blue: #94C2ED;
+$orange: #E38968;
+$gray: #92959E;
+
+
+.container {
+  background:#fff;
+
+}
+.inbox_msg {
+	border: 1px solid #c4c4c4;
+  overflow-y: scroll;
+  height: 400px;
+  clear: both;
+  
+}
+
+.messaging {
+	padding: auto;
+}
+.msg_history {
+	height: auto;
+	overflow-y: auto;
+  
+}
+
+
+
+.received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+   }
+   .received_withd_msg p {
+    overflow-x: initial;
+    background: $green;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    margin: 0;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+  }
+.time_date {
+	color: #747474;
+	display: block;
+	font-size: 12px;
+	margin: 8px 0 0;
+}
+.received_withd_msg { width: 57%;}
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 100%;
+}
+
+ .sent_msg p {
+  background: #05728f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0; color:#fff;
+  padding: 5px 10px 5px 12px;
+  width:100%;
+}
+.outgoing_msg{  margin:26px 0 26px;}
+.sent_msg {
+  float: right;
+  width: 60%;
+}
+
+

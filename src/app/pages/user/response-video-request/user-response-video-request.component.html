@@ -1,0 +1,93 @@
+
+<dx-tab-panel
+  [height]="'inherit'"
+  [selectedIndex]="0"
+  [loop]="false"
+  [animationEnabled]="true"
+  [swipeEnabled]="false"
+>
+  <!--Gelen İstekler Tabi-->
+  <dxi-item title="Gelen İstekler" style="background-color: white">
+    <dx-scroll-view width="100%" height="100%">
+      <div style="padding:10px;">
+        <div id="data-grid" >
+          <dx-data-grid
+            id="gridContainer"
+            [dataSource]="dataSource"
+            keyExpr="id"
+            [remoteOperations]="true"
+
+            [hoverStateEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true"
+            [showColumnLines]="true" [showRowLines]="true" [rowAlternationEnabled]="false"
+            [export]="true" [groupPanel]="true"
+            [selectedRowKeys]="[]"
+          >
+
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+            <dxo-scrolling mode="standart" columnRenderingMode="virtual"></dxo-scrolling>
+            <!-- Pagination start -->
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSizesArray"></dxo-pager>
+            <dxo-filter-row [visible]="true" ></dxo-filter-row>
+            <!-- Pagination end -->
+
+            <dxo-search-panel [visible]="true"></dxo-search-panel>
+            <dxi-column dataField="requestTitle" caption="İstek Başlığı"></dxi-column>
+            <dxi-column dataField="requestContent" caption="İçerik"></dxi-column>
+            <dxi-column dataField="creationDate" caption="Gönderilme Tarihi" ></dxi-column>
+            <dxi-column type="buttons" alignment="center"  width= '100px' >
+              <dxi-button hint="Önizleme" icon="fas fa-upload" [visible]="true" [onClick]="openCreateResponsePopUp"></dxi-button>
+            </dxi-column>
+            <!-- <dxo-master-detail [enabled]="true" template="masterDetail"></dxo-master-detail> -->
+          </dx-data-grid>
+        </div>
+      </div>
+    </dx-scroll-view>
+  </dxi-item>
+
+  <!--Gonderi Tabi-->
+  <dxi-item title="Gönderilmiş Cevaplar" style="background-color: white">
+    <dx-scroll-view width="100%" height="100%">
+      <div style="padding:10px;">
+        <div id="data-grid-2" >
+          <dx-data-grid
+            id="gridContainer-2"
+            [dataSource]="dataSourceResponseVideoRequest"
+            keyExpr="id"
+            [remoteOperations]="true"
+
+            [hoverStateEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true"
+            [showColumnLines]="true" [showRowLines]="true" [rowAlternationEnabled]="false"
+            [export]="true" [groupPanel]="true"
+            [selectedRowKeys]="[]"
+          >
+
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+            <dxo-scrolling mode="standart" columnRenderingMode="virtual"></dxo-scrolling>
+            <!-- Pagination start -->
+            <dxo-paging [pageSize]="10"></dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSizesArray"></dxo-pager>
+            <dxo-filter-row [visible]="true" ></dxo-filter-row>
+            <!-- Pagination end -->
+
+            <dxo-search-panel [visible]="true"></dxo-search-panel>
+            <dxi-column dataField="requestTitle" caption="İstek Başlığı"></dxi-column>
+            <dxi-column dataField="requestContent" caption="İçerik"></dxi-column>
+            <dxi-column dataField="creationDate" caption="Gönderilme Tarihi" ></dxi-column>
+            <dxi-column type="buttons" alignment="center"  width= '100px' >
+              <dxi-button hint="Cevap Ekle" icon="fas fa-upload" [visible]="true" [onClick]="openCreateResponsePopUp"></dxi-button>
+            </dxi-column>
+            <!-- <dxo-master-detail [enabled]="true" template="masterDetail"></dxo-master-detail> -->
+          </dx-data-grid>
+        </div>
+      </div>
+    </dx-scroll-view>
+  </dxi-item>
+</dx-tab-panel>
+
+
+
+
+<app-user-video-submit-popup (getAllResponseVideoRequest)="getAllResponseVideoRequest()" (getAllVideoRequest)="getItemsList()"></app-user-video-submit-popup>
+
+

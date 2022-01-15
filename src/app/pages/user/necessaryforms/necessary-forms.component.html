@@ -1,0 +1,309 @@
+<!-- Horizontal Steppers -->
+<div class="row">
+  <div class="col-md-12">
+
+    <!-- Stepers Wrapper -->
+    <ul class="stepper stepper-horizontal">
+
+      <!-- First Step -->
+      <li [class]="stepperClassesMap['patientStepperClass']">
+        <dx-tooltip
+          target="#titleParentInformation"
+          [(visible)]="titleParentInformation"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Ebeveyn Bilgileri
+          </div>
+        </dx-tooltip>
+        <a id="titleParentInformation"
+           (mouseenter)="toggleDefault('titleParentInformation')"
+           (mouseleave)="toggleDefault('titleParentInformation')">
+          <span class="circle">1</span>
+        </a>
+      </li>
+
+      <!-- Second Step -->
+      <li [class]="stepperClassesMap['demographicFeaturesStepperClass']">
+
+        <dx-tooltip
+          target="#titleDemographicFeatures"
+          [(visible)]="titleDemographicFeatures"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Demografik Özellikler
+          </div>
+        </dx-tooltip>
+        <a id="titleDemographicFeatures"
+           (mouseenter)="toggleDefault('titleDemographicFeatures')"
+           (mouseleave)="toggleDefault('titleDemographicFeatures')">
+          <span class="circle">2</span>
+        </a>
+
+      </li>
+
+      <!-- Third Step -->
+      <li [class]="stepperClassesMap['physicalAppearanceFormStepperClass']">
+
+        <dx-tooltip
+          target="#titlPhysicalFeatures"
+          [(visible)]="titlPhysicalFeatures"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Fiziksel Özellikler
+          </div>
+        </dx-tooltip>
+        <a id="titlPhysicalFeatures"
+           (mouseenter)="toggleDefault('titlPhysicalFeatures')"
+           (mouseleave)="toggleDefault('titlPhysicalFeatures')">
+          <span class="circle">3</span>
+        </a>
+      </li>
+
+      <!-- 4th Step -->
+      <li [class]="stepperClassesMap['prenatalFeaturesFormStepperClass']">
+        <dx-tooltip
+          target="#titlePrenatalFeatures"
+          [(visible)]="titlePrenatalFeatures"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Doğum Öncesi Özellikler
+          </div>
+        </dx-tooltip>
+        <a id="titlePrenatalFeatures"
+           (mouseenter)="toggleDefault('titlePrenatalFeatures')"
+           (mouseleave)="toggleDefault('titlePrenatalFeatures')">
+          <span class="circle">4</span>
+        </a>
+      </li>
+
+      <!-- 5th Step -->
+      <li [class]="stepperClassesMap['birthFeaturesFormStepperClass']">
+        <dx-tooltip
+          target="#titleBirthFeatures"
+          [(visible)]="titleBirthFeatures"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Doğum Özellikleri
+          </div>
+        </dx-tooltip>
+        <a id="titleBirthFeatures"
+           (mouseenter)="toggleDefault('titleBirthFeatures')"
+           (mouseleave)="toggleDefault('titleBirthFeatures')">
+          <span class="circle">5 </span>
+        </a>
+      </li>
+
+      <!-- 6th Step -->
+      <li [class]="stepperClassesMap['afterBirthFeaturesFormStepperClass']">
+        <dx-tooltip
+          target="#titleAfterBirthFeatures"
+          [(visible)]="titleAfterBirthFeatures"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Doğum Sonrası Özellikler
+          </div>
+        </dx-tooltip>
+        <a id="titleAfterBirthFeatures"
+           (mouseenter)="toggleDefault('titleAfterBirthFeatures')"
+           (mouseleave)="toggleDefault('titleAfterBirthFeatures')">
+          <span class="circle">6</span>
+        </a>
+      </li>
+
+      <!-- 7th Step -->
+      <li [class]="stepperClassesMap['afterBirthCerebralPalsyReasonsFormStepperClass']">
+        <dx-tooltip
+          target="#titleAfterBirthCerebralPalsyReasons"
+          [(visible)]="titleAfterBirthCerebralPalsyReasons"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Doğum Sonrası Serebral Palsy Nedenleri
+          </div>
+        </dx-tooltip>
+        <a id="titleAfterBirthCerebralPalsyReasons"
+           (mouseenter)="toggleDefault('titleAfterBirthCerebralPalsyReasons')"
+           (mouseleave)="toggleDefault('titleAfterBirthCerebralPalsyReasons')">
+          <span class="circle">7</span>
+        </a>
+      </li>
+
+      <!-- 8th Step -->
+      <li [class]="stepperClassesMap['appliedTreatmentsFormStepperClass']">
+        <dx-tooltip
+          target="#titleAppliedTreatments"
+          [(visible)]="titleAppliedTreatments"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Uygulanan Tedaviler
+          </div>
+        </dx-tooltip>
+        <a id="titleAppliedTreatments"
+           (mouseenter)="toggleDefault('titleAppliedTreatments')"
+           (mouseleave)="toggleDefault('titleAppliedTreatments')">
+          <span class="circle">8</span>
+        </a>
+      </li>
+
+      <!-- 9th Step -->
+      <li [class]="stepperClassesMap['coexistingDiseasesFormStepperClass']">
+        <dx-tooltip
+          target="#titleCoexistingDiseases"
+          [(visible)]="titleCoexistingDiseases"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Eşlik Eden Problemler
+          </div>
+        </dx-tooltip>
+        <a id="titleCoexistingDiseases"
+           (mouseenter)="toggleDefault('titleCoexistingDiseases')"
+           (mouseleave)="toggleDefault('titleCoexistingDiseases')">
+          <span class="circle">9</span>
+        </a>
+      </li>
+
+      <!--10th Step -->
+      <li [class]="stepperClassesMap['physiotherapyPastFormStepperClass']">
+        <dx-tooltip
+          target="#titlePhysiotherapyPast"
+          [(visible)]="titlePhysiotherapyPast"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Aldığı Terapiler Hakkında
+          </div>
+        </dx-tooltip>
+        <a id="titlePhysiotherapyPast"
+           (mouseenter)="toggleDefault('titlePhysiotherapyPast')"
+           (mouseleave)="toggleDefault('titlePhysiotherapyPast')">
+          <span class="circle">10</span>
+        </a>
+      </li>
+
+      <!-- 11th Step -->
+      <li [class]="stepperClassesMap['expectationsAboutProgramFormStepperClass']">
+        <dx-tooltip
+          target="#titleExpectationsAboutProgram"
+          [(visible)]="titleExpectationsAboutProgram"
+          [closeOnOutsideClick]="false">
+          <div *dxTemplate="let data = data of 'content'">
+            Programın amaçları ve beklentiler
+          </div>
+        </dx-tooltip>
+        <a id="titleExpectationsAboutProgram"
+           (mouseenter)="toggleDefault('titleExpectationsAboutProgram')"
+           (mouseleave)="toggleDefault('titleExpectationsAboutProgram')">
+          <span class="circle">11</span>
+        </a>
+      </li>
+
+    </ul>
+    <!-- /.Stepers Wrapper -->
+  </div>
+</div>
+<!-- /.Horizontal Steppers -->
+
+
+<ng-template [ngIf]="stepperActiveBooleans['isPatientStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+<!--     First step content - Ebeveyn Bilgileri-->
+    <app-patient-form (nextStepper)="goDemographicFeatures()"
+                      [patientForm]="patientForm"
+                      [addPhoneButtonOptions1]="addPhoneButtonOptions1"
+                      [addPhoneButtonOptions2]="addPhoneButtonOptions2"
+                      [phoneOptions1]="phoneOptions1"
+                      [phoneOptions2]="phoneOptions2"></app-patient-form>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isDemographicFeaturesStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <!--  <div class="long-title" style="padding-left: 4%">-->
+    <!--    <h3 style="color:navy;"> Genel Değerlendirme Formu</h3>-->
+    <!--  </div>-->
+<!--    <h3>Genel Değerlendirme Formu</h3>-->
+    <app-demographic-features (backStepper)="goPatientForm()" (nextStepper)="goPhysicalAppearance()" [generalEvaluationForm]="generalEvaluationForm"></app-demographic-features>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isPhysicalAppearanceStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-physical-appearance (backStepper)="goDemographicFeatures()" (nextStepper)="goPrenatalFeatures()" [generalEvaluationForm]="generalEvaluationForm"></app-physical-appearance>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isPrenatalFeaturesStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-prenatal-features (backStepper)="goPhysicalAppearance()" (nextStepper)="goBirthFeatures()" [generalEvaluationForm]="generalEvaluationForm"></app-prenatal-features>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isBirthFeaturesStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-birth-features (backStepper)="goPrenatalFeatures()" (nextStepper)="goAfterBirthFeatures()" [generalEvaluationForm]="generalEvaluationForm"></app-birth-features>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isAfterBirthFeaturesStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-after-birth-features (backStepper)="goBirthFeatures()" (nextStepper)="goAfterBirthCerebralPalsyReasons()" [generalEvaluationForm]="generalEvaluationForm"></app-after-birth-features>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isAfterBirthCerebralPalsyReasonsStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-after-birth-cerebral-palsy-reasons (backStepper)="goAfterBirthFeatures()" (nextStepper)="goAppliedTreatments()" [generalEvaluationForm]="generalEvaluationForm"></app-after-birth-cerebral-palsy-reasons>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isAppliedTreatmentsStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-applied-treatments (backStepper)="goAfterBirthCerebralPalsyReasons()"
+                            (nextStepper)="goCoexistingDiseases()"
+                            [generalEvaluationForm]="generalEvaluationForm"
+                            [isOrthesisMap]="isOrthesisMap"
+                            [orthesisMap]="orthesisMap"
+                            [usedMedicineOptions]="usedMedicineOptions"
+                            [appliedSurgeryOptions]="appliedSurgeryOptions"
+                            [addAppliedSurgeryButtonOptions]="addAppliedSurgeryButtonOptions"
+                            [addUsedMedicineButtonOptions] ="addUsedMedicineButtonOptions"
+                            [otherOrthesisOptions]="otherOrthesisOptions"
+                            [addOtherOrthesisButtonOptions]="addOtherOrthesisButtonOptions"></app-applied-treatments>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isCoexistingDiseasesStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-coexisting-diseases (backStepper)="goAppliedTreatments()"
+                             (nextStepper)="goPhysiotherapyPast()"
+                             [generalEvaluationForm]="generalEvaluationForm"
+                             [mentalProblemCheckBoxOptions]="mentalProblemCheckBoxOptions"
+                             [coexistingDiseaseMap]="coexistingDiseaseMap"
+                             [hearingProblemCheckBoxOptions]="hearingProblemCheckBoxOptions"
+                             [behaviorProblemCheckBoxOptions]="behaviorProblemCheckBoxOptions"
+                             [speakingProblemCheckBoxOptions]="speakingProblemCheckBoxOptions"
+                             [sleepingProblemCheckBoxOptions]="sleepingProblemCheckBoxOptions"
+                             [swallowProblemCheckBoxOptions]="swallowProblemCheckBoxOptions"
+                             [hipProblemCheckBoxOptions]="hipProblemCheckBoxOptions"
+                             [skolyozCheckBoxOptions]="skolyozCheckBoxOptions"  ></app-coexisting-diseases>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isPhysiotherapyPastStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-physiotherapy-past (backStepper)="goCoexistingDiseases()"
+                            (nextStepper)="goExpectationsAboutProgram()"
+                            [physiotherapyCenterMap]="physiotherapyCenterMap"
+                            [generalEvaluationForm]="generalEvaluationForm"
+                            [specialEducationCheckBoxOptions]="specialEducationCheckBoxOptions"
+                            [medicineCenterCheckBoxOptions]="medicineCenterCheckBoxOptions"></app-physiotherapy-past>
+  </div>
+</ng-template>
+
+<ng-template [ngIf]="stepperActiveBooleans['isExpectationsAboutProgramStepperActive']">
+  <div style="padding: 1%; margin: 2%; background-color: white; border-radius:3px; height: 100%" class="dx-card">
+    <app-expectations-about-program (backStepper)="goPhysiotherapyPast()"
+                                    (nextStepper)="submit()"
+                                    [generalEvaluationForm]="generalEvaluationForm"
+                                    [expectationsAboutProgramOptions]="expectationsAboutProgramOptions"
+                                    [addExpectationsAboutProgramButtonOptions]="addExpectationsAboutProgramButtonOptions"></app-expectations-about-program>
+  </div>
+</ng-template>

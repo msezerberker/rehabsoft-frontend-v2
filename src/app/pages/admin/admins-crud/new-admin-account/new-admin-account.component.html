@@ -1,0 +1,83 @@
+<div class="col-xs-12">
+
+    <dx-popup [minHeight]="'95%'" [showTitle]="true" [title]="popUpTitle" [dragEnabled]="true" [disabled]="isLoading"
+      [closeOnOutsideClick]="true" [(visible)]="isVisible" [position]="{ my: 'center', at: 'center' }"
+      [resizeEnabled]="true">
+  
+  
+      <dx-form [alignItemLabels]="true" [formData]="registerForm" [disabled]="loading" [showValidationSummary]="true">
+  
+        <!--  Hasta Bilgileri-->
+        <dxi-item [alignItemLabels]="true" itemType="group" caption="Kullanıcı Bilgileri" [colCount]="2">
+          <!--left group-->
+          <dxi-item [alignItemLabels]="true" itemType="group">
+            <dxi-item dataField="username" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Kullanıcı Adı:'}">
+              <dxi-validation-rule type="required" message="Kullanıcı adını girmeniz gerekli"></dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Kullanıcı Adı"></dxo-label>
+            </dxi-item>
+  
+            <dxi-item dataField="password" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Şifre', mode: 'password' }">
+              <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+              <dxi-validation-rule type="custom" message="Şifre uyuşmuyor" [validationCallback]="confirmPassword">
+              </dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Şifre"></dxo-label>
+            </dxi-item>
+  
+            <dxi-item dataField="confirmedPassword" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Şifreyi Onayla', mode: 'password' }">
+              <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+              <dxi-validation-rule type="custom" message="Şifre uyuşmuyor" [validationCallback]="confirmPassword">
+              </dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Şifreyi Onayla"></dxo-label>
+            </dxi-item>
+          </dxi-item>
+  
+          <!--right group-->
+          <dxi-item [alignItemLabels]="true" itemType="group">
+            <dxi-item dataField="firstName" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ad'}">
+              <dxi-validation-rule type="required" message="Ad kısmı boş bırakılamaz"></dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Ad"></dxo-label>
+            </dxi-item>
+  
+            <dxi-item dataField="surname" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Soyad'}">
+              <dxi-validation-rule type="required" message="Soyad boş bırakılamaz"></dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Soyad"></dxo-label>
+            </dxi-item>
+  
+  
+            <dxi-item dataField="email" editorType="dxTextBox"
+              [editorOptions]="{ stylingMode: 'filled', placeholder: 'Email'}">
+              <dxi-validation-rule type="required" message="Email boş bırakılamaz"></dxi-validation-rule>
+              <dxo-label location="top" [visible]="true" text="Email"></dxo-label>
+              <dxi-validation-rule type="email" message="Geçersiz Email"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+        </dxi-item>
+  
+  
+  
+  
+  
+        <dxi-item>
+          <div class='policy-info'>
+            By creating an account, you agree to the <a routerLink="#">Terms of Service</a> and <a routerLink="#">Privacy
+              Policy</a>
+          </div>
+        </dxi-item>
+  
+        <dxi-item itemType="button" [buttonOptions]="submitbuttonOptions">
+        </dxi-item>
+  
+  
+  
+      </dx-form>
+  
+  
+  
+    </dx-popup>
+  
+  </div>

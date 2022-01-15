@@ -1,0 +1,193 @@
+<!-- Video Submit Component-->
+<dx-popup [minHeight]="'95%'" [showTitle]="true" [title]="popUpTitle" [dragEnabled]="true" [disabled]="isLoading"
+          [closeOnOutsideClick]="true" [(visible)]="isVisible" [position]="{ my: 'center', at: 'center' }" [resizeEnabled]="true">
+  <div *dxTemplate="let data of 'content'">
+
+    <dx-tab-panel
+      [height]="'inherit'"
+      [selectedIndex]="0"
+      [loop]="false"
+      [animationEnabled]="true"
+      [swipeEnabled]="false"
+    >
+      <!--Sayac Tanimi Tabi-->
+      <dxi-item title="Cevap Açıklaması" style="background-color: white">
+        <dx-scroll-view width="100%" height="100%">
+          <div style="padding:10px;">
+
+            <dx-form  #dxCreateResponseFormComponent [formData]="dataSource" [colCount]="1">
+              <!-- left group start-->
+              <dxi-item [alignItemLabels]="true" itemType="group" >
+
+                <dxi-item dataField="responseContent" editorType="dxTextArea" [label]="{text: 'Cevap Açıklaması'}"
+                          [editorOptions]="{maxLength:500, height: 150, id: 'responseContent'}">
+<!--                  <dxi-validation-rule-->
+<!--                    type="required"-->
+<!--                    message="Bu alan gerekli!">-->
+<!--                  </dxi-validation-rule>-->
+                </dxi-item>
+
+              </dxi-item>
+
+              <!-- just add space for buttons-->
+              <!-- just add space for buttons-->
+            </dx-form>
+
+          </div>
+
+        </dx-scroll-view>
+      </dxi-item>
+
+
+      <!--I Tabi-->
+      <dxi-item title="Gönderilecek Videolar" style="background-color: white">
+        <dx-scroll-view width="100%" height="100%">
+
+          <!-- List for media start-->
+          <div id="form-container-1" style="padding:10px;">
+            <dx-scroll-view width="100%" height="250px">
+              <dx-form id="list" [formData]="dataSource" [colCount]="1">
+                <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="1" caption="Eklenen Videolar">
+
+                  <dxi-item [alignItemLabels]="true" itemType="group" >
+                    <dxi-item [template]="'noteListTemplate'">
+                    </dxi-item>
+                    <div *dxTemplate="let data of 'noteListTemplate'">
+                      <b>
+                        <p>
+                          Eklediğiniz videoları burdan görebilirsiniz
+                        </p>
+                      </b>
+                    </div>
+                  </dxi-item>
+
+                  <dxi-item [alignItemLabels]="true" itemType="group" >
+                    <dxi-item [template]="'listTemplate'">
+                    </dxi-item>
+                    <div *dxTemplate="let data of 'listTemplate'">
+                      <div id="list-demo">
+                        <div class="widget-container">
+                          <div class="list-container">
+                            <dx-list [items]="filesVideoRequestList"
+                                     [allowItemDeleting]="true"
+                                     height="100%">
+                              <div *dxTemplate="let item of 'item'">
+                                <div class="product">
+                                  <div>{{item.file.name}}</div>
+                                </div>
+                              </div>
+                            </dx-list>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </dxi-item>
+
+                </dxi-item>
+              </dx-form>
+            </dx-scroll-view>
+
+          </div>
+          <!-- List for media end -->
+
+
+          <div id="form-container" style="padding:10px;">
+            <dx-form [formData]="fileForAddToList">
+
+              <!-- Video or Image uploading part -->
+              <dxi-item [alignItemLabels]="true" itemType="group" caption="Video Ekleme">
+
+                <dxi-item [alignItemLabels]="true" itemType="group" >
+                  <dxi-item [template]="'noteFileMediaTemplate'">
+                  </dxi-item>
+                  <div *dxTemplate="let data of 'noteFileMediaTemplate'">
+                    <p>
+                      İstenilen videoları burdan ekleyebilirsiniz
+                    </p>
+                  </div>
+                </dxi-item>
+
+                <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="3">
+                  <dxi-item [alignItemLabels]="true" itemType="group">
+                    <dxi-item [template]="'exerciseMediaTemplate'">
+                      <dxo-label
+                        [text]="'Dosya'" location="top" [visible]="true" >
+                      </dxo-label>
+                    </dxi-item>
+                    <div *dxTemplate="let data of 'exerciseMediaTemplate'">
+                      <div class="fileuploader-container">
+                        <dx-file-uploader #dxFileUploaderComponent
+                                          selectButtonText="Dosya Ekle"
+                                          labelText="Sürükleyebilirsiniz"
+                                          uploadedMessage="Başarıyla yüklendi"
+                                          uploadFailedMessage="Yükleme başarısız"
+                                          [multiple]="false"
+                                          uploadMode="useForm"
+                                          (onValueChanged)="uploadMediaToAdd($event)"
+                                          accept= "image/*,video/*"
+                                          [maxFileSize]="1048576000"
+                        >
+                        </dx-file-uploader>
+                      </div>
+                    </div>
+                  </dxi-item>
+
+<!--                  <dxi-item [alignItemLabels]="true" itemType="group" >-->
+<!--                    <dxi-item dataField="text" editorType="dxTextBox"-->
+<!--                              [editorOptions]="{ stylingMode: 'outlined', placeholder: ''}">-->
+<!--                      <dxi-validation-rule type="required" message="Başlık gerekli"></dxi-validation-rule>-->
+<!--                      <dxo-label-->
+<!--                        [text]="'Medyanın Başlığı'" location="top" [visible]="true" >-->
+<!--                      </dxo-label>-->
+<!--                    </dxi-item>-->
+<!--                  </dxi-item>-->
+
+                  <dxi-item [alignItemLabels]="true">
+                    <dxi-item [template]="'buttonTemplate'">
+                    </dxi-item>
+                    <div *dxTemplate="let data of 'buttonTemplate'">
+                      <div class="float-right" style="margin-top:22px;margin-right:10px;">
+                        <dx-button
+                          text="Ekle"
+                          icon="plus"
+                          type="default"
+                          (onClick)="addMediaToList($event)">
+                        </dx-button>
+                      </div>
+                    </div>
+                  </dxi-item>
+
+                </dxi-item>
+              </dxi-item>
+
+            </dx-form>
+          </div>
+
+        </dx-scroll-view>
+      </dxi-item>
+
+    </dx-tab-panel>
+
+
+
+  </div>
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar= "bottom"
+    alignment="right"
+    location="after"
+    [options]="cancelButtonOption">
+  </dxi-toolbar-item>
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar= "bottom"
+    alignment="right"
+    location="after"
+    [options]="submitButtonOption">
+  </dxi-toolbar-item>
+
+
+</dx-popup>

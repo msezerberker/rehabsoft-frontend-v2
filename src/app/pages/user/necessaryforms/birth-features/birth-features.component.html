@@ -1,0 +1,144 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--5. Doğum Özellikleri-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="5. Doğum Özellikleri" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="birthWeek" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:1, max:60, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Doğum haftası gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğum Haftası"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="birthType" editorType="dxSelectBox" [editorOptions]="{ stylingMode: 'filled', placeholder: 'Seçiniz...',
+                             dataSource: birthTypeSelectBoxList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Doğum şekli gerekli">
+        </dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğum Şekli"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="birthWeight" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:1, max:10000, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Doğum kilosu gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğum Kilosu (gr)"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="birthHeadAroundCm" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:1, max:10000, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Doğumda baş çevresi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğumda Baş Çevresi (cm)"></dxo-label>
+      </dxi-item>
+      <dxi-item
+        dataField="isPregnancyInfectionInfo"
+        editorType="dxRadioGroup"
+        [editorOptions]="isPregnancyInfectionInfoOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hamilelikte enfeksiyon var mı?"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="pregnancyInfectionInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isPregnancyInfectionInfo"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 100}">
+        <dxi-validation-rule type="required" message="Açıklama gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hamilelikte enfeksiyon var ise açıklaması"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isPregnancyMedicineUsageInfo"
+        editorType="dxRadioGroup"
+        [editorOptions]="isPregnancyMedicineUsageInfoOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Gebelikte ilaç kullanımı var mı?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="pregnancyMedicineUsageInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isPregnancyMedicineUsageInfo"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 100}">
+        <dxi-validation-rule type="required" message="Gebelikte ilaç kullanımı gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="İlaç kullanımı var ise açıklaması"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item  [alignItemLabels]="true" itemType="group">
+        <dxi-item
+          dataField="isApgarScoreKnown"
+          editorType="dxRadioGroup"
+          [editorOptions]="isApgarScoreOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label location="top" [visible]="true" text="APGAR skoru biliniyor mu?"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item dataField="apgarScore" editorType="dxNumberBox" [visible]="generalEvaluationForm.isApgarScoreKnown"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:1, max:10, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="APGAR skoru gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="APGAR skoru (5. Dakika)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item  [alignItemLabels]="true" itemType="group">
+        <dxi-item
+          dataField="isBirthAnoxia"
+          editorType="dxRadioGroup"
+          [editorOptions]="isBirthAnoxiaOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label location="top" [visible]="true" text="Doğumda oksijensiz kalma"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isBirthEmpurpling"
+        editorType="dxRadioGroup"
+        [editorOptions]="isBirthEmpurplingOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğumda morarma"></dxo-label>
+      </dxi-item>
+      <dxi-item
+        dataField="isBirthCrying"
+        editorType="dxRadioGroup"
+        [editorOptions]="isBirthCryingOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğumda ağlama"></dxo-label>
+      </dxi-item>
+      <dxi-item
+        dataField="isHighBloodPressorPregnancy"
+        editorType="dxRadioGroup"
+        [editorOptions]="isHighBloodPressorPregnancyOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Gebelikte yüksek tansiyon"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isPregnancyDrinking"
+        editorType="dxRadioGroup"
+        [editorOptions]="isPregnancyDrinkingOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Gebelikte Alkol Kullanımı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isPregnanycSmoking"
+        editorType="dxRadioGroup"
+        [editorOptions]="isPregnancySmokingOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Gebelikte Sigara Kullanımı"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

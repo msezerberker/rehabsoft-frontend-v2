@@ -1,0 +1,70 @@
+
+  <div class="card">
+
+      <div class="row">
+        <div class="col-md-4"  style="display: grid;justify-content: left;align-content: center;" >
+          <div class="date-card" >
+            <div class="day">{{day}}</div>
+            <div>
+              <div class="month">{{month}}</div>
+              <div class="year">{{year}}</div>
+            </div>
+            <div style="margin-left:15px">
+              <div class="day">{{hour}}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" style="display: grid;align-content: center;">
+          <div style="padding-left: 12px;">
+            <div class="month">Görüşülecek kişi:</div>
+            <h2 style="margin-top: 0px;margin-bottom: 3px;">{{with.firstName +" "+with.surname}}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="isDoctor; else elseBlock" class="col-md-2" style="margin-bottom: 8px;margin-top: 8px">
+          <div class="text-center" style="vertical-align: middle">
+            <div class="row-md-6"  style="margin-bottom: 8px;">
+              <dx-tooltip
+                [target]="'#p'+meeting.id"
+                [(visible)]="isTooltipShowed"
+                [closeOnOutsideClick]="false">
+                <div *dxTemplate="let data = data of 'content'">
+                  Görüşmenin tarihi henüz gelmedi!
+                </div>
+              </dx-tooltip>
+              <div [id]="'p'+meeting.id" (mouseenter)="toggleDefault()" (mouseleave)="toggleDefault()">
+                <button [disabled]="isCallDisabled" (click)="callButtonClicked($event)" type="button" class="btn btn-success btn-circle btn-xl">
+                  <i class="fas fa-phone"></i>
+                </button>
+              </div>
+            </div>
+            <div class="row-md-6">
+              <button (click)="delIconClick($event)" type="button" class="btn btn-danger btn-circle btn-xl"><i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #elseBlock>
+          <div class="row-md-6 align-self-center"  style="margin-bottom: 8px;">
+            <dx-tooltip
+              [target]="'#'+meeting.id"
+              [(visible)]="isTooltipShowed"
+              [closeOnOutsideClick]="false">
+              <div *dxTemplate="let data = data of 'content'">
+                Görüşmenin tarihi henüz gelmedi!
+              </div>
+            </dx-tooltip>
+            <div [id]="meeting.id" (mouseenter)="toggleDefault()" (mouseleave)="toggleDefault()">
+              <button [disabled]="isCallDisabled" (click)="callButtonClicked($event)" type="button" class="btn btn-success btn-circle btn-xl " style="align-content: center;">
+                <i class="fas fa-phone"></i>
+              </button>
+            </div>
+          </div>
+        </ng-template>
+
+      </div>
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+
+  </div>

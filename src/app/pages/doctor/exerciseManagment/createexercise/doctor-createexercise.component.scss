@@ -1,0 +1,19 @@
+// for devextreme datagrid column headers
+::ng-deep #gridContainer {
+  height: 480px;
+}
+::ng-deep #gridContainer .dx-datagrid-header-panel .dx-toolbar-before .dx-toolbar-item:not(:first-child) {
+  background-color: #0e589c;
+}
+
+
+::ng-deep .fileuploader-container{
+  border: 1px solid #d3d3d3;
+  margin: 0px 20px 20px 20px;
+}
+
+::ng-deep .file-container{
+  border: 1px solid #d3d3d3;
+  margin: 20px;
+  padding:10px;
+}

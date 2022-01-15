@@ -1,0 +1,41 @@
+<mdb-carousel  [interval]="0" [animation]="'slide'">
+
+    <mdb-carousel-item #mdbCarouselItem *ngFor="let notification of dataSource; let i = index">
+      <div *ngIf="dataSource[i].isImage; else elseBlock" style="height: 400px;margin: auto;">
+        <app-asyn-image-component [src]="dataSource[i].videoRequestUrl" ></app-asyn-image-component>
+      </div>
+
+      <ng-template #elseBlock>
+        <div style="max-height:500px; margin: auto; overflow: hidden">
+          <video-player-component [options]="{
+          responsive: true,
+          autoplay: false,
+          controls: true,
+          sources: [{ src: dataSource[i].videoRequestUrl, type: 'video/mp4', withCredentials: true}],
+          html5:{
+              hls: {
+                withCredentials: true,
+                overrideNative: true
+              }
+            }
+            }" [paused]="mdbCarouselItem.active">
+          </video-player-component>
+        </div>
+
+      </ng-template>
+    </mdb-carousel-item>
+
+</mdb-carousel>
+
+
+<!--<mdb-carousel [interval]="0" [animation]="'slide'">-->
+<!--  <mdb-carousel-item *ngFor="let notification of dataSource; let i = index">-->
+<!--    <div *ngIf="isImage; else elseBlock" >-->
+<!--      <img class="d-block" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="ada">-->
+<!--    </div>-->
+<!--    <ng-template #elseBlock>-->
+<!--      <img class="d-block" src="https://mdbootstrap.com/img/Photos/Slides/img%20(130).jpg" alt="ada">-->
+<!--    </ng-template>-->
+
+<!--  </mdb-carousel-item>-->
+<!--</mdb-carousel>-->

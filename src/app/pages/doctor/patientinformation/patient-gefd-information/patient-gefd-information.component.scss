@@ -1,0 +1,76 @@
+//::ng-deep span.dx-field-item-label-content{
+//  width:10%
+//}
+::ng-deep .fileuploader-container{
+    border: 1px solid #d3d3d3;
+    margin: 20px 20px 0 20px;
+  }
+
+  ::ng-deep .fileuploader-container-2{
+    border: 1px solid #d3d3d3;
+    margin: 0px 20px 20px 20px;
+  }
+
+  ::ng-deep .fileuploader-container-3{
+    border: 1px solid #d3d3d3;
+    margin: 0px 20px 20px 20px;
+  }
+
+  ::ng-deep #delete-surgery-button{
+    margin: 0px;
+    width: 1%;
+  }
+
+  ::ng-deep #delete-orthesis-button{
+    margin: 0px;
+    width: 1%;
+  }
+
+  ::ng-deep #orthesis-container{
+    border: 1px solid #d3d3d3;
+    margin: 20px 20px 20px 20px;
+    background-color: #9EE2E9;
+  }
+
+  ::ng-deep #delete-expectations-button{
+    margin-top: 40px;
+  }
+
+  ::ng-deep .dx-button .dx-button-normal .dx-button-mode-text .dx-widget .dx-button-has-icon .dx-button-has-text{
+    margin-top: 40px;
+  }
+  //::ng-deep .dx-form .dx-field-item-label{
+  //
+  //    width: 60%;
+  //}
+
+::ng-deep #video-grid{
+  padding: 60px 23px 13px;
+  alignment: center;
+}
+
+::ng-deep .botox-image-title-container{
+  width:10px
+}
+
+::ng-deep #data-grid{
+  padding: 0px 23px 13px;
+  alignment: center;
+}
+
+::ng-deep .list-container{
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+::ng-deep .dx-scrollview-content{
+  max-height: 250px;
+}
+
+::ng-deep .dot {
+  height: 25px;
+  width: 25px;
+  background-color: black;
+  border-radius: 50%;
+  display: inline-block;
+}

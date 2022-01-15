@@ -1,0 +1,62 @@
+
+<div class="col-xs-12">
+
+  <dx-popup [height]="'400px'" [width]="'700px'" [showTitle]="true" [title]="_showedExerciseDate+' Programı'" [dragEnabled]="true"
+            [closeOnOutsideClick]="true" [(visible)]="isVisible" [position]="{ my: 'center', at: 'center' }" [resizeEnabled]="true">
+    <div *dxTemplate="let data of 'content'">
+
+      <dx-scroll-view width="100%" height="100%">
+
+        <b>
+          <p>
+            *Tamamladığınız egzersizleri seçebilir, egzersizin nasıl yapılacağını görüntülemek için göz butonuna tıklayabilirsiniz.
+          </p>
+        </b>
+
+        <dx-list
+          [dataSource]="scheduledExerciseListWithName"
+          [height]="400"
+          keyExpr="id"
+          displayExpr="exerciseName"
+          [allowItemDeleting]="false"
+          [showSelectionControls]="true"
+          selectionMode="multiple"
+          [(selectedItems)]="selectedScheduledExercises"
+          (onContentReady)="onContentReady($event)">
+          <div *dxTemplate="let item of 'item'">
+              <div class="product">
+                <div>{{item.exerciseName}}</div>
+                <div style="float: right">
+                  <dx-button icon="fas fa-eye" (onClick)="viewExerciseClicked(item)">
+                  </dx-button>
+                </div>
+              </div>
+          </div>
+        </dx-list>
+      </dx-scroll-view>
+    </div>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="cancelButtonOption">
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="submitButtonOption">
+    </dxi-toolbar-item>
+
+
+  </dx-popup>
+
+</div>
+
+
+
+<app-view-exercise-component #viewExerciseComponent></app-view-exercise-component>

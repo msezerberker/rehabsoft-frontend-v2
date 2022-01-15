@@ -1,0 +1,23 @@
+:host {
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.layout-header {
+  z-index: 1501;
+}
+
+.layout-body {
+  flex: 1;
+  min-height: 0;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+::ng-deep [_nghost-rbb-c362] .menu-container[_ngcontent-xxn-c362] .dx-treeview .dx-treeview-node-container .dx-treeview-node.dx-state-selected > .dx-treeview-item * {
+  color: #3CBAB2;
+}

@@ -1,0 +1,45 @@
+<!-- Title & header of demo aplication. -->
+<div>
+  <h3 style="position: relative; left: 10px;">Online Görüşme
+  </h3>
+</div>
+
+
+<div class="container">
+
+  <div class="row text-center">
+    <!-- Other person's camera video will show up here -->
+    <div class="col">
+      <h3 style="margin: 5px">{{""}}</h3>
+      <video style="width: 50vh; height: 50vh;" id="remoteVideo" poster="assets/image/user.png" autoplay></video>
+    </div>
+
+    <!-- Your camera video will show up here. -->
+    <div class="col">
+<!--      <h3 style="margin: 5px">Siz</h3>-->
+      <video style="width: 50vh; height: 50vh;" id="localVideo" poster="assets/image/user.png" autoplay></video>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Button to leave video conference. -->
+    <div class="col text-center">
+      <button id="leaveButton" type="button" class="btn btn-danger btn-circle btn-xl">
+        <i class="fas fa-phone-slash"></i>
+      </button>
+
+      <button type="button" (click)="muteYourStream()" class="btn btn-warning btn-circle btn-xl" style="margin-left:7px">
+        <i class="fas fa-microphone-slash"></i>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!--	<script type="text/javascript" src="conf.js?reloads=true"></script>-->
+

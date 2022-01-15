@@ -1,0 +1,7 @@
+::ng-deep .label span {
+  display: inline-block;
+  width: 10px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}

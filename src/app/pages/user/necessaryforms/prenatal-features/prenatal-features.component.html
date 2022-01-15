@@ -1,0 +1,100 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--4. Doğum Öncesi Özellikler-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="4. Doğum Öncesi Özellikler" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="mothersGivenBirthAgeYear" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:1, max:200, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Annenin doğumdaki yaşı gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Annenin Doğumdaki Yaşı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="mothersEducationLevel" editorType="dxSelectBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Seçiniz...', dataSource: educationLevelList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Annenin eğitim seviyesi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Annenin Eğitim Seviyesi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="typeOfPregnancy" editorType="dxSelectBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Seçiniz...', dataSource: typeOfPregnancyList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Bu alan gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Gebelik Türü"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="fathersEducationLevel" editorType="dxSelectBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Seçiniz...', dataSource: educationLevelList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Babanın eğitim seviyesi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Babanın Eğitim Seviyesi"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+      <dxi-item  [alignItemLabels]="true" itemType="group">
+        <dxi-item
+          dataField="isMultiplePregnancy"
+          #eventRadioGroupMultiplePregnancy
+          editorType="dxRadioGroup"
+          [editorOptions]="isMultiplePregnancyOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label location="top" [visible]="true" text="Çoğul Gebelik"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <!--      BUrda bir sorun var-->
+      <dxi-item dataField="multiplePregnancy" editorType="dxSelectBox" [visible]="generalEvaluationForm.isMultiplePregnancy"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Seçiniz...', dataSource: multiplePregnancySelectBoxList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Çoğul gebelik gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Çoğul Gebelik Tipi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="diseaseOfMotherPregnancy.diseaseName" editorType="dxTextArea"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 100}">
+        <dxi-validation-rule type="required" message="Hamilelikte geçirilen hastalık gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hamilelikte Geçirilen Hastalık"></dxo-label>
+      </dxi-item>
+
+      <dxi-item  [alignItemLabels]="true" itemType="group">
+        <dxi-item
+          dataField="isRelativeMarriage"
+          editorType="dxRadioGroup"
+          [editorOptions]="isRelativeMarriageOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label location="top" [visible]="true" text="Ebeveynlerde Akrabalık"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item  [alignItemLabels]="true" itemType="group">
+        <dxi-item
+          dataField="isBloodIncompatibility"
+          editorType="dxRadioGroup"
+          [editorOptions]="isBloodIncompatibilityOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label location="top" [visible]="true" text="Kan uyuşmazlığı"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

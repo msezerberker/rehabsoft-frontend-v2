@@ -1,0 +1,104 @@
+<dx-form [alignItemLabels]="true" [formData]="patientForm" [disabled]="loading" [showValidationSummary]="true">
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="1. Ebeveyn Bilgileri" [colCount]="2">
+    <!--left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="parent1.firstname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Adı'}">
+        <dxi-validation-rule type="required" message="Ebeveyn ad boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Adı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent1.surname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Soyadı'}">
+        <dxi-validation-rule type="required" message="Ebeveynin soyadı boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Soyadı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent1.parentType" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'İlişki'}">
+        <dxi-validation-rule type="required" message="Ebeveynin ilişkisi boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hastanın Nesi?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent1.email" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Email\'i'}">
+        <dxi-validation-rule type="required" message="Email boş bırakılamaz"></dxi-validation-rule>
+        <dxi-validation-rule type="email" message="Geçersiz Email"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Email'i"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Telefon">
+
+      <dxi-item itemType="group"
+                name="phones"
+                *ngFor="let phone of phoneOptions1; let i = index">
+        <dxi-item [dataField]="'phoneNumberListForParent1[' + i + ']'" [editorOptions]="phoneOptions1[i]">
+          <dxo-label
+            [text]="'Phone ' + (i + 1)" location="top" >
+          </dxo-label>
+          <dxi-validation-rule type="required" message="Telefon numaras"></dxi-validation-rule>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="button"
+                horizontalAlignment="left"
+                cssClass="add-phone-button"
+                [buttonOptions]="addPhoneButtonOptions1">
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+
+  <!--Ebeveyn Bilgileri-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="2. Ebeveyn Bilgileri" [colCount]="2">
+    <!--left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="parent2.firstname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Adı'}">
+        <dxi-validation-rule type="required" message="Ebeveyn ad boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Adı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent2.surname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Soyadı'}">
+        <dxi-validation-rule type="required" message="Ebeveynin soyadı boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Soyadı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent2.parentType" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'İlişki'}">
+        <dxi-validation-rule type="required" message="Ebeveynin ilişkisi boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hastanın Nesi?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="parent2.email" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ebeveynin Email\'i'}">
+        <dxi-validation-rule type="required" message="Email boş bırakılamaz"></dxi-validation-rule>
+        <dxi-validation-rule type="email" message="Geçersiz Email"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Ebeveynin Email'i"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Telefon">
+
+      <dxi-item itemType="group"
+                name="phones"
+                *ngFor="let phone of phoneOptions2; let i = index">
+        <dxi-item [dataField]="'phoneNumberListForParent2[' + i + ']'" [editorOptions]="phoneOptions2[i]">
+          <dxo-label
+            [text]="'Phone ' + (i + 1)" location="top" >
+          </dxo-label>
+        </dxi-item>
+      </dxi-item>
+      <dxi-item itemType="button"
+                horizontalAlignment="left"
+                cssClass="add-phone-button"
+                [buttonOptions]="addPhoneButtonOptions2">
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+
+  <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+  </dxi-item>
+</dx-form>

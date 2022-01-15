@@ -1,0 +1,61 @@
+
+<a style="color: black" [href]='getAllPatientUrl'><h3 style="margin-right: 5px;margin-left: 25px;margin-top: 15px;float:left;">{{"Hastalar" + "/"}}</h3></a>
+<h3 style="margin-right: 10px;margin-left: 0px;margin-top: 15px;font-weight: bold;float:left;">{{"Hasta:"}}</h3>
+<h3 style="margin-left: 25px;margin-top: 15px;">{{(patient===undefined)?"":patient.user.firstName+" "+patient.user.surname}}</h3>
+
+<hr style="margin-left: 25px;margin-right: 25px;margin-top: 15px;margin-bottom: 0px;border-top: 1px solid black;">
+
+<div id="data-grid">
+
+<div class="tabs-resp-custom" style="margin-top: 15px;">
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item" style="background-color: #3cbab2">
+    <a class="nav-link" [routerLink]='[generalInformationUrl]' routerLinkActive="active">Genel Bilgiler</a>
+    </li>
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link" [routerLink]='[generalEvalFormurl]' routerLinkActive="active">Genel Değerlendirme Formu</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link" [routerLink]='[exerciseProgramsUrl]' routerLinkActive="active">Egzersiz Programı</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link"  [routerLink]='[videoRequestUrl]' routerLinkActive="active">Videolar</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link" [routerLink]='[dynamicFormsUrl]' routerLinkActive="active">Formlar-Anketler</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2" >
+      <a class="nav-link" [routerLink]='[onlineMeetingsUrl]' routerLinkActive="active">Görüşmeler</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link"  [routerLink]='[messageUrl]' routerLinkActive="active">Mesajlar</a>
+    </li>
+
+    <li class="nav-item" style="background-color: #3cbab2">
+      <a class="nav-link">Notlar</a>
+    </li>
+
+
+
+
+
+  </ul>
+  <div class="tab-content" style="margin-top: 15px">
+    <div class="tab-pane active">
+      <router-outlet></router-outlet>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+

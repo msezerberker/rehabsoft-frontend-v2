@@ -1,0 +1,80 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!-- 2. Demografik Bilgiler-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="2. Demografik Bilgiler" [colCount]="2">
+
+    <!--left group start-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+      <dxi-item dataField="nameSurname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: ''}">
+        <dxi-validation-rule type="required" message="Bu alan gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Çocuğun Adı Soyadı" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="gender" editorType="dxSelectBox" [editorOptions]="{ stylingMode: 'filled', placeholder: 'Seçiniz...',
+                             dataSource: genderSelectBoxList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Cinsiyet gerekli">
+        </dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Cinsiyet"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="address" editorType="dxTextArea"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 100}">
+        <dxi-validation-rule type="required" message="Adres gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Adres"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <!--right group start-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="birthDate" editorType="dxDateBox"
+                [editorOptions]="birthDateOption">
+        <dxi-validation-rule type="required" message="Doğum tarihi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğum Tarihi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="numberOfSiblings" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Kardeş sayısı', min:0, max:2147483647, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Kardeş sayısı gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Kardeş Sayısı"></dxo-label>
+      </dxi-item>
+
+
+      <dxi-item dataField="whichChild" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'Kaçıncı Çocuk', min:1, max:2147483647, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Kaçıncı çocuk bilgisi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Kaçıncı Çocuk"></dxo-label>
+      </dxi-item>
+
+
+      <dxi-item dataField="ageAsMonth" editorType="dxNumberBox"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '(örn. 18 ay)', min:1, max:2147483647, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Kaçıncı çocuk bilgisi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Düzeltilmiş Yaş (ay olarak)"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

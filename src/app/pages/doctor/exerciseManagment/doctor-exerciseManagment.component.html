@@ -1,0 +1,76 @@
+<div class="row" style="padding: 23px 23px 13px;">
+  <div class="col-lg-12">
+
+    <div class="card-body" style="padding: 3px;  background-color: #9EE2E9;">
+
+      <dx-toolbar style="padding: 3px;  background-color: #9EE2E9;">
+
+        <dxi-item location="before" widget="dxButton" [options]="yeniButtonOptions" locateInMenu="auto">
+        </dxi-item>
+
+        <dxi-item location="center" widget="dxButton" locateInMenu="never">
+          <div *dxTemplate>
+            <div class='toolbar-label'><b>EGZERSİZLER LİSTESİ</b> </div>
+          </div>
+        </dxi-item>
+
+        <dxi-item location="after" widget="dxButton" locateInMenu="auto" [options]="refreshButtonOptions">
+        </dxi-item>
+      </dx-toolbar>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="data-grid">
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="dataSource"
+    keyExpr="id"
+
+    [hoverStateEnabled]="true" [showBorders]="true" [focusedRowEnabled]="true"
+    [showColumnLines]="true" [showRowLines]="true" [rowAlternationEnabled]="false"
+    [export]="true" [groupPanel]="true"
+    [selectedRowKeys]="[]">
+
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-scrolling mode="standart" columnRenderingMode="virtual"></dxo-scrolling>
+    <!-- Pagination start -->
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSizesArray"></dxo-pager>
+    <dxo-filter-row [visible]="true" ></dxo-filter-row>
+    <!-- Pagination end -->
+
+    <dxi-column
+      dataField="id"
+      caption="Egzersiz ID"
+      width= '100px'
+    ></dxi-column>
+    <dxi-column
+      dataField="exerciseName"
+      caption="Egzersiz Adı"
+      width= '250px'
+    ></dxi-column>
+    <dxi-column
+      dataField="exerciseContent"
+      caption="Egzersiz İçerik"
+    ></dxi-column>
+    <dxi-column
+      dataField="creatorNameSurname"
+      caption="Oluşturan Kişi"
+      width= '160px'
+    ></dxi-column>
+
+    <dxi-column type="buttons" alignment="center"  width= '100px' >
+      <dxi-button hint="Önizleme" icon="fas fa-eye" [visible]="true" [onClick]="previewIconClick"></dxi-button>
+      <dxi-button hint="Düzenle" icon="edit" [visible]="true" [onClick]="editIconClick"></dxi-button>
+      <dxi-button hint="Sil" icon="trash" [visible]="true" [onClick]="delIconClick"></dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+</div>
+
+<app-createexercise-component (getAllExercise)="getItemsList()"></app-createexercise-component>
+
+<app-view-exercise-component></app-view-exercise-component>

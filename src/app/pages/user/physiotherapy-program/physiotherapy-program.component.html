@@ -1,0 +1,33 @@
+<div id="form-grid">
+
+
+
+  <div class="card-body" style="padding: 3px;">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Atanmış Egzersiz Programları</h2>
+      </div>
+    </div>
+  </div>
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="assignedprogramList"
+    [remoteOperations]="true"
+    [showBorders]="true">
+
+    <dxo-paging pageSize="15"></dxo-paging>
+
+    <dxi-column dataField="id" caption="Program No" width= '110px' dataType="number"></dxi-column>
+    <dxi-column dataField="startDate" caption="Başlangıç Tarihi" width= '200px' dataType="datetime"></dxi-column>
+    <dxi-column dataField="finishDate" caption="Bitiş Tarihi" width='200px' dataType="datetime"></dxi-column>
+    <dxi-column dataField="goal" caption="Programın Amacı" dataType="string"></dxi-column>
+    <dxi-column  dataField="isActive" dataType="boolean" width='150px' caption="Program aktif mi?"></dxi-column>
+    <dxi-column type="buttons" alignment="center"  width='100px' >
+      <dxi-button hint="Önizleme" icon="fas fa-eye" [visible]="true" [onClick]="previewIconClick"></dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+</div>
+
+<app-view-exercise-programs-component #ViewExerciseProgramsComponent></app-view-exercise-programs-component>

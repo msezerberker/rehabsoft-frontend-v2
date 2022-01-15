@@ -1,0 +1,59 @@
+<div class="container" id="video-grid">
+
+
+  <div class="card-body" style="padding: 3px; background-color: #9EE2E9;">
+
+    <dx-toolbar style="padding: 3px; background-color: #9EE2E9;">
+
+      <dxi-item location="center" widget="dxButton" locateInMenu="never">
+        <div *dxTemplate>
+          <div class='toolbar-label'><b>GENEL BİLGİLER</b> </div>
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+
+
+
+<dx-form [formData]="dataSource" [readOnly]="true">
+
+
+    <!-- Genel Bilgiler-->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Genel Bilgiler" [colCount]="2">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+            <dxi-item dataField="tcKimlikNo">
+                <dxo-label location="left" [visible]="true" text="Kimlik Numarası:"></dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="user.firstName">
+                <dxo-label location="left" [visible]="true" text="İsim: "></dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="user.surname">
+                <dxo-label location="left" [visible]="true" text="Soyisim:"></dxo-label>
+            </dxi-item>
+
+            <dxi-item dataField="user.email">
+                <dxo-label location="left" [visible]="true" text="Email Adresi:"></dxo-label>
+            </dxi-item>
+
+
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+            <div style="width: 50%"></div>
+
+        </dxi-item>
+
+
+        <!--End of first part-->
+    </dxi-item>
+
+
+
+
+
+</dx-form>
+
+</div>

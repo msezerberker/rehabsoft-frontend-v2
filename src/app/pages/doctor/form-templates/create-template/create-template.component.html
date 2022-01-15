@@ -1,0 +1,73 @@
+<div class="container" id="form-grid">
+
+  <div class="dx-fieldset">
+    <div class="dx-field">
+      <div class="dx-field-label">Form Başlığı</div>
+      <div class="dx-field-value">
+        <dx-text-box
+          maxLength="200"
+          [showClearButton]="true"
+          [(value)]="formTitle"
+          [rtlEnabled]="false">
+        </dx-text-box>
+      </div>
+    </div>
+
+    <div class="dx-field">
+      <div class="dx-field-label">Form Açıklaması</div>
+      <div class="dx-field-value">
+        <dx-text-area
+          height="120"
+          maxLength="500"
+          [(value)]="formExplanation"
+          [rtlEnabled]="false">
+        </dx-text-area>
+      </div>
+    </div>
+  </div>
+
+  <dx-data-grid [(dataSource)]="dataSource" [remoteOperations]="true" [height]="600" [showBorders]="true" (onInitNewRow)="onInitNewRow($event)">
+    <dxo-row-dragging
+      [allowReordering]="true"
+      [onReorder]="onReorder"
+      [showDragIcons]="showDragIcons"
+    ></dxo-row-dragging>
+    <dxo-sorting mode="none"></dxo-sorting>
+
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+    <dxo-editing mode="row" [allowAdding]="true" [allowUpdating]="true" [allowDeleting]="true">
+    </dxo-editing>
+    <dxo-master-detail [enabled]="true" template="detail"  ></dxo-master-detail>
+    <dxi-column dataField="fieldName" caption="Soru İçeriği">
+      <dxi-validation-rule type="stringLength" [min]="1" [max]="50"
+                           message="Bu alan boş bırakılamaz ve en fazla 100 karakter içerebilir."></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="fieldType" caption="Soru Türü" dataType="string" >
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+      <dxo-lookup [dataSource]="formFieldSelectBoxElements" ></dxo-lookup>
+    </dxi-column>
+
+    <div  *dxTemplate="let order of 'detail'" >
+      <div *ngIf="isEnabled(order.key.key)">
+        <app-default-value-data-grid [key]="order.key.key" [formFieldDefaultValueMap]="formFieldDefaultValueMap" [dataSource]="formFieldDefaultValueMap[order.key.key]"></app-default-value-data-grid>
+      </div>
+    </div>
+  </dx-data-grid>
+
+  <div class="dx-field">
+    <div class="dx-field-label"></div>
+    <div class="dx-field-value">
+      <dx-button icon="arrowright"
+                 text="Formu Gönder"
+                 (onClick)="btnClick()">
+      </dx-button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

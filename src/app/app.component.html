@@ -1,0 +1,18 @@
+
+
+
+
+<ng-container *ngIf="isAuthorized(); else notAuthorized">
+  <app-side-nav-outer-toolbar title="{{getTitleByRole()}}">
+    <router-outlet></router-outlet>
+    <app-footer>
+      Copyright © 2020-{{appInfo.currentYear}} {{appInfo.title}} Inc.
+      <br/>
+      Tüm ticari markalar veya tescilli ticari markalar, ilgili sahiplerinin mülkiyetindedir.
+    </app-footer>
+  </app-side-nav-outer-toolbar>
+</ng-container>
+
+<ng-template #notAuthorized>
+  <app-not-authorized-container></app-not-authorized-container>
+</ng-template>

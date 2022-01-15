@@ -1,0 +1,103 @@
+
+<div id="form-container-1" style="padding:10px;">
+  <dx-scroll-view width="100%" height="200px">
+    <dx-form id="list" [colCount]="1">
+      <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="1" >
+
+        <dxi-item [alignItemLabels]="true" itemType="group" >
+          <dxi-item [template]="'noteListTemplate'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'noteListTemplate'">
+            <b>
+              <p style="color: #00A7AC">
+                Seçenekler:
+              </p>
+            </b>
+          </div>
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group" >
+          <dxi-item [template]="'listTemplate'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'listTemplate'">
+            <div id="list-demo">
+              <div class="widget-container">
+                <dx-list
+                  [items]="dataSource"
+                  [repaintChangesOnly]="true"
+                  keyExpr="id"
+                  displayExpr="valueName"
+                  [allowItemDeleting]="true"
+                  [itemDeleteMode]="'static'">
+                </dx-list>
+              </div>
+            </div>
+          </div>
+        </dxi-item>
+
+      </dxi-item>
+    </dx-form>
+  </dx-scroll-view>
+
+</div>
+<!-- List for media end -->
+
+
+<div id="form-container" style="padding:10px;">
+  <dx-form [formData]="defaultValue">
+
+    <!-- Video or Image uploading part -->
+    <dxi-item [alignItemLabels]="true" itemType="group" >
+
+      <dxi-item [alignItemLabels]="true" itemType="group" >
+        <dxi-item [template]="'secmeli'">
+        </dxi-item>
+        <div *dxTemplate="let data of 'secmeli'">
+          <b>
+            <p style="color: #00A7AC">
+              Seçenek Ekleme:
+            </p>
+          </b>
+        </div>
+      </dxi-item>
+
+
+      <dxi-item [alignItemLabels]="true" itemType="group" >
+        <dxi-item [template]="'noteFileMediaTemplate'">
+        </dxi-item>
+        <div *dxTemplate="let data of 'noteFileMediaTemplate'">
+          <p >
+            Bu form sorusu için hastaya gönderilmesini istediğiniz seçenekleri buradan ekleyebilirsiniz.
+          </p>
+        </div>
+      </dxi-item>
+
+      <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+        <dxi-item [alignItemLabels]="true" itemType="group" >
+          <dxi-item dataField="valueName" editorType="dxTextBox"
+                    [editorOptions]="{ stylingMode: 'outlined'}">
+            <dxi-validation-rule min="1" max="100" type="required" message="Başlık gerekli"></dxi-validation-rule>
+            <dxo-label
+              [text]="'Secmeli Soru'" location="top" [visible]="true" >
+            </dxo-label>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true">
+          <dxi-item [template]="'buttonTemplate'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'buttonTemplate'">
+            <div class="float-right" style="margin-top:26px;margin-right:10px;">
+              <dx-button
+                text="Ekle"
+                icon="plus"
+                type="default"
+                (onClick)="addMediaToList($event)">
+              </dx-button>
+            </div>
+          </div>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+  </dx-form>
+</div>

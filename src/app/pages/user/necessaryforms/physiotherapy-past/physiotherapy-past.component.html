@@ -1,0 +1,68 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--10. Aldığı Terapiler Hakkında -->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="10. Aldığı Terapiler Hakkında" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item
+        dataField="isPhysiotherapyPast"
+        editorType="dxRadioGroup"
+        [editorOptions]="isPhysiotherapyPastOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Fizyoterapi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="physiotherapyPast.numberOfWeeklySession" editorType="dxNumberBox" [visible]="generalEvaluationForm.isPhysiotherapyPast"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:1000, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Bu alan gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Haftalık seans sayısı" ></dxo-label>
+      </dxi-item>
+
+      <dxi-item [alignItemLabels]="true" itemType="group" [visible]="generalEvaluationForm.isPhysiotherapyPast">
+        <dxi-item [template]="'ftrtitleTemplate'">
+        </dxi-item>
+        <div *dxTemplate="let data of 'ftrtitleTemplate'">
+          <p style="color:#728e94" >
+            Hangi FTR Merkezleri:
+          </p>
+        </div>
+      </dxi-item>
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="specialEducationCheckBoxOptions" [visible]="generalEvaluationForm.isPhysiotherapyPast">
+        </dxi-item>
+        <dxi-item editorType="dxCheckBox" [editorOptions]="medicineCenterCheckBoxOptions" [visible]="generalEvaluationForm.isPhysiotherapyPast">
+          <dxo-label location="left" [visible]="false" text="Tıp merkezi-hastane"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+    </dxi-item>
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+</dx-form>

@@ -1,0 +1,118 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--9. Eşlik Eden Problemler-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="9. Eşlik Eden Problemler" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+      <dxi-item
+        dataField="isVisualImpairment"
+        editorType="dxRadioGroup"
+        [editorOptions]="isVisualImpairmentOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Görme Problemi var mı?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="visualimpairment.information" editorType="dxTextArea" [visible]="generalEvaluationForm.isVisualImpairment"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 80}">
+        <dxi-validation-rule type="required" message="Görme probleminin ne olduğunu gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Görme probleminin ne olduğunu yazınız"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isHearingImpairment"
+        editorType="dxRadioGroup"
+        [editorOptions]="isHearingImpairmentOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Duyma Problemi var mı?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="hearingImpairment.isUseHearingAid" [visible]="generalEvaluationForm.isHearingImpairment"
+                editorType="dxRadioGroup"
+                [editorOptions]="isHearingAidOption">
+        <dxo-label location="top" [visible]="true" text="İşitme cihazı kullanıyor mu"></dxo-label>
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item dataField="epilepsy.epilepsySituation" editorType="dxSelectBox" [editorOptions]="{ stylingMode: 'filled', placeholder: 'Seçiniz...',
+                             dataSource: epilepsySelectBoxList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Epilepsi gerekli">
+        </dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Epilepsi"></dxo-label>
+      </dxi-item>
+
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="mentalProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Bilişsel Problem"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="hearingProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Duyu Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="behaviorProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Davranış Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="speakingProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Konuşma Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="sleepingProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Uyku Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="swallowProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Yutma Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="hipProblemCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Kalça Problemi"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+
+      <dxi-item itemType="group">
+        <dxi-item editorType="dxCheckBox" [editorOptions]="skolyozCheckBoxOptions">
+          <dxo-label location="left" [visible]="true" text="Skolyoz"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

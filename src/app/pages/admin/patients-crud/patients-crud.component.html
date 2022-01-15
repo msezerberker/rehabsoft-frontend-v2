@@ -1,0 +1,46 @@
+<div id="data-grid">
+
+    <div class="card-body" style="padding: 3px;  background-color: #9EE2E9;">
+  
+      <dx-toolbar style="padding: 3px;  background-color: #9EE2E9;">
+  
+        <dxi-item location="center" widget="dxButton" locateInMenu="never">
+          <div *dxTemplate>
+            <div class='toolbar-label'><b>HASTA LİSTESİ</b> </div>
+          </div>
+        </dxi-item>
+      </dx-toolbar>
+  
+    </div>
+  
+  
+    <dx-data-grid id="gridContainer" [dataSource]="dataSource" [remoteOperations]="true" [showBorders]="true">
+  
+      <dxo-paging pageSize="15"></dxo-paging>
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+      <dxi-column dataField="username" caption="Kullanici Adi"></dxi-column>
+  
+      <dxi-column dataField="firstName" caption="Adı"></dxi-column>
+      <dxi-column dataField="surname" caption="Soyadı"></dxi-column>
+      <dxi-column dataField="email" caption="Mail Adresi"></dxi-column>
+      <dxi-column type="buttons" alignment="center" width='100px'>
+        <dxi-button hint="Düzenle" icon="edit" [visible]="true"></dxi-button>
+        <dxi-button hint="Sil" icon="trash" [visible]="true" [onClick]="deleteButtonClick"></dxi-button>
+
+    </dxi-column>
+  
+  
+      <!-- <dxo-master-detail [enabled]="true" template="masterDetail"></dxo-master-detail> -->
+    </dx-data-grid>
+  
+  
+   
+    
+   
+  </div>
+  
+  
+  
+  
+  
+  

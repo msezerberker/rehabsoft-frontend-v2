@@ -1,0 +1,81 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--7. Doğum Sonrası Sonrası Serebral Palsi Nedeni-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="7. Doğum Sonrası Sonrası Serebral Palsi Nedeni (doğumdan 28 gün sonra oluşan durumlar)" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item
+        dataField="isAfterBirthReasonCerebralPalsy"
+        editorType="dxRadioGroup"
+        [editorOptions]="isAfterBirthReasonCerebralPalsyOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Doğum sonrası serebral palsi var mı?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.occuringMonth" editorType="dxNumberBox" [visible]="generalEvaluationForm.isAfterBirthReasonCerebralPalsy"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:100, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Oluşma zamanı gerekli"></dxi-validation-rule>
+        <dxi-validation-rule type="range" [max]="24" message="25 ay sonrasında oluşan nedenler SP olarak kabul edilmez"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Oluşma zamanı (ay)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.cause" editorType="dxSelectBox" [visible]="generalEvaluationForm.isAfterBirthReasonCerebralPalsy"
+                [editorOptions]="{ onValueChanged: handleClickCauseForAfterBirthReasonCerebralPalsy, stylingMode: 'outlined', placeholder: 'Seçiniz...', dataSource: causesOfAfterBirthCerebralPalsyList, valueExpr: 'value', displayExpr: 'name'}">
+        <dxi-validation-rule type="required" message="Nedeni gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Varsa Nedeni"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.causeInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isTraumaVisible"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'örn.: Yüksekten düşme, araç iç/dışı trafik kazası, kafa travması', maxLength:1000, minHeight: 60}">
+        <dxi-validation-rule type="required" message="Travma açıklaması gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Travma Açıklaması"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.causeInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isBrainTumour"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', maxLength:1000, minHeight: 60}">
+        <dxi-validation-rule type="required" message="Beyin tümörü tipi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Beyin Tümörü Tipi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.causeInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isAfterSurgerySituation"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'örn.: Cerrahi sırasında kalp durması, anesteziye bağlı gelişen anaflaksi/şok',
+                 maxLength:1000, minHeight: 60}">
+        <dxi-validation-rule type="required" message="Durumun açıklaması gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Durumun Açıklaması"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="afterBirthReasonCerebralPalsy.causeInfo" editorType="dxTextArea" [visible]="generalEvaluationForm.isBrainBleedingOrBloodCirculationOrVascularDisorder"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: 'örn.: Bebeklikte inme geçirme, pıhtı atması vb',
+                 maxLength:1000, minHeight: 60}">
+        <dxi-validation-rule type="required" message="Durumun açıklaması gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Durumun Açıklaması"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <div style="width: 50%"></div>
+    </dxi-item>
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

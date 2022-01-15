@@ -1,0 +1,86 @@
+<dx-form [alignItemLabels]="true" [formData]="registerForm" [disabled]="loading" [showValidationSummary]="true">
+
+<!--  Hasta Bilgileri-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="Kullanıcı ve Hasta Bilgileri" [colCount]="2">
+    <!--left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="username" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Hastanın TC Kimlik Numarası'}">
+        <dxi-validation-rule type="required" message="TC kimlik numarası gerekli"></dxi-validation-rule>
+        <dxi-validation-rule
+            type="numeric"
+            message="TC Kimlik Numaranız sadece sayısal karakterlerden oluşabilir">
+        </dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hastanın TC Kimlik Numarası"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="password" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Şifre', mode: 'password' }">
+        <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Şifre"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="confirmedPassword" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Şifreyi Onayla', mode: 'password' }">
+        <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+        <dxi-validation-rule type="custom" message="Şifre uyuşmuyor" reevaluate="true" [validationCallback]="confirmPassword"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Şifreyi Onayla"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item dataField="firstName" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Ad'}">
+        <dxi-validation-rule type="required" message="Hasta adı boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hasta Adı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="surname" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Soyad'}">
+        <dxi-validation-rule type="required" message="Hasta soyadı boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hasta Soyadı"></dxo-label>
+      </dxi-item>
+
+
+      <dxi-item dataField="email" editorType="dxTextBox"
+                [editorOptions]="{ stylingMode: 'filled', placeholder: 'Email'}">
+        <dxi-validation-rule type="required" message="Email boş bırakılamaz"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Email"></dxo-label>
+        <dxi-validation-rule type="email" message="Geçersiz Email"></dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+
+
+
+
+
+  <dxi-item>
+    <div class='policy-info'>
+      By creating an account, you agree to the <a routerLink="#">Terms of Service</a> and <a routerLink="#">Privacy
+      Policy</a>
+    </div>
+  </dxi-item>
+
+  <dxi-item itemType="button" [buttonOptions]="submitbuttonOptions" >
+  </dxi-item>
+
+  <dxi-item>
+    <div class="login-link">
+      Hesabınız var mı? <a routerLink="/login">Giriş Yap</a>
+    </div>
+  </dxi-item>
+
+
+  <ng-container *dxTemplate="let item of 'createAccountTemplate'">
+    <span class="dx-button-text">
+      <ng-container *ngIf="loading; else notLoading">
+        <dx-load-indicator width="24px" height="24px" [visible]="true"></dx-load-indicator>
+      </ng-container>
+
+      <ng-template #notLoading></ng-template>
+    </span>
+  </ng-container>
+
+</dx-form>

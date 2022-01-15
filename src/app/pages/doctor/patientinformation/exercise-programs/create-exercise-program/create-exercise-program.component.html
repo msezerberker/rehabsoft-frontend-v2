@@ -1,0 +1,200 @@
+
+<dx-popup
+  [width]="'85%'"
+  [height]="'98%'"
+  [showTitle]="true"
+  [title]="'Hastaya Program Oluştur'"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="false"
+  [(visible)]="isVisible"
+  [resizeEnabled]="true">
+
+  <dx-scroll-view width="100%" height="98%" padding="2px">
+    <ng-template [ngIf]="stepperActiveBooleans['isDatePicking']">
+      <div style="padding: 1%; margin: 5px; background-color: white; border-radius:3px;" class="dx-card">
+        <b>
+          <p>
+            *Programın hangi tarihler aralığında olacağını, o günler dahil olacak şekilde seçin.
+          </p>
+        </b>
+        <div class="dx-fieldset">
+          <div class="dx-field">
+            <div class="dx-field-label">Başlangıç Tarihi</div>
+            <div class="dx-field-value">
+              <dx-date-box #startDateBox [min]="now" [(value)]="programStartDate" [openOnFieldClick]="true" type="date">
+              </dx-date-box>
+              <p style="color:red;">{{ (startDateBoxValidationMessage===undefined)?"":startDateBoxValidationMessage+"!"}}</p>
+            </div>
+          </div>
+          <div class="dx-field">
+            <div class="dx-field-label">Bitiş Tarihi</div>
+            <div class="dx-field-value">
+              <dx-date-box #endDateBox [min]="tomorrow" [(value)]="programEndDate" [openOnFieldClick]="true" type="date">
+              </dx-date-box>
+              <p style="color:red;">{{ (endDateBoxValidationMessage===undefined)?"":endDateBoxValidationMessage+"!"}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="stepperActiveBooleans['isProgramCreationPicking']">
+      <div style="padding: 1%; margin-top: 5px;margin-left: 20px;margin-right: 20px; background-color: white; border-radius:3px;" class="dx-card">
+
+        <!-- [views]="views"-->
+        <!-- Scheduler  -->
+        <dx-scheduler
+          timeZone="America/Los_Angeles"
+          [dataSource]="scheduledExerciseList"
+          currentView="Numeric Mode"
+          [currentDate]="now"
+          [height]="600"
+          dataCellTemplate="dataCellTemplate"
+          (onCellClick)="onExerciseProgramFormOpening($event)"
+          (onAppointmentClick)="cancelOnAppointmentFormOpening($event)"
+          (onAppointmentDblClick)="cancelOnAppointmentFormOpening($event)"
+          (onAppointmentFormOpening)="cancelOnAppointmentFormOpening($event)"
+          [textExpr]="'exerciseName'">
+          <dxo-editing #editingOptions
+                       [allowAdding]="false"
+                       [allowDeleting]="false"
+                       [allowUpdating]="false"
+                       [allowResizing]="false"
+                       [allowDragging]="false"
+          ></dxo-editing>
+          <dxi-view
+            [hidden]="true"
+            name="Numeric Mode"
+            type="month"
+            [maxAppointmentsPerCell]="2">
+          </dxi-view>
+          <dxi-resource
+            fieldExpr="isApplied"
+            label="Yapıldı mı?"
+            [dataSource]="resourcesData"
+          ></dxi-resource>
+
+          <div *dxTemplate="let dataCell of 'dataCellTemplate'"
+               [ngClass]="{
+                  'disable-date': isDateOutOfRange(dataCell.startDate, programStartDate, programEndDate),
+                  'dinner': false
+                }">
+                      {{dataCell.text}}
+          </div>
+        </dx-scheduler>
+        <b>
+          <p>
+            *Egzersiz eklemek istediğiniz günün üstüne çift tıklayın.
+          </p>
+        </b>
+
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="stepperActiveBooleans['isGoal']">
+      <div style="padding: 1%; margin-top: 20px;margin-left: 20px;margin-right: 20px; background-color: white; border-radius:3px;" class="dx-card">
+        <div class="dx-fieldset">
+          <div class="dx-field">
+            <div class="dx-field-label">Programın Amacı</div>
+            <div class="dx-field-value">
+              <dx-text-area
+                placeholder="Program sonunda elde edinmesi beklenen kazanımların ne olduğunu açıklayınız"
+                [(value)]="goal"
+                [maxLength]="1000">
+              </dx-text-area>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </ng-template>
+  </dx-scroll-view>
+
+  <!-- Horizontal Steppers -->
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 ">
+      <!-- Stepers Wrapper -->
+      <ul class="stepper stepper-horizontal">
+        <!-- First Step -->
+        <li [class]="(stepperActiveBooleans['isDatePicking']) ? 'active' : ''">
+          <a disabled="true">
+            <span class="circle">1</span>
+          </a>
+        </li>
+
+        <!-- Second Step -->
+        <li [class]="(stepperActiveBooleans['isProgramCreationPicking']) ? 'active' : ''">
+          <a disabled="true">
+            <span class="circle">2</span>
+          </a>
+        </li>
+
+        <!-- Third Step -->
+        <li [class]="(stepperActiveBooleans['isGoal']) ? 'active' : ''">
+          <a disabled="true">
+            <span class="circle">3</span>
+          </a>
+        </li>
+      </ul>
+      <!-- /.Stepers Wrapper -->
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <!-- /.Horizontal Steppers -->
+
+  <ng-template [ngIf]="stepperActiveBooleans['isDatePicking']">
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="nextToScheduleButtonOption">
+    </dxi-toolbar-item>
+  </ng-template>
+
+  <ng-template [ngIf]="stepperActiveBooleans['isProgramCreationPicking']">
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="backToDatePickingButtonOption">
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="nextToGoalButtonOption">
+    </dxi-toolbar-item>
+
+  </ng-template>
+
+  <ng-template [ngIf]="stepperActiveBooleans['isGoal']">
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="backToScheduleButtonOption">
+    </dxi-toolbar-item>
+
+    <dxi-toolbar-item
+      widget="dxButton"
+      toolbar= "bottom"
+      alignment="right"
+      location="after"
+      [options]="submitButtonOption">
+    </dxi-toolbar-item>
+
+  </ng-template>
+
+</dx-popup>
+
+
+
+<app-exercise-form-modal-component #exerciseFormModalComponent [exerciseDate]="selectedDate" (submitExercises)="submitScheduledExercisesClicked($event)"></app-exercise-form-modal-component>

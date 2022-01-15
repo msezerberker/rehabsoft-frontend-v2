@@ -1,0 +1,62 @@
+<div class="dx-card responsive-paddings">
+  <dx-scroll-view width="100%" height="440px">
+    <div style="margin-right: 8px">
+      <div *ngIf="dataSource===undefined || dataSource.length===0" class="text-center">
+        <h3 style="color: gray">Bildiriminiz bulunmamaktadır...</h3>
+      </div>
+
+      <div *ngFor="let notification of dataSource; let i = index">
+
+        <div class="dx-card notification-card view rgba-white-slight waves-light" mdbWavesEffect
+          *ngIf="notification.status==0">
+          <a href="{{dataSource[i].notificationUrl}}" (click)="click(notification.id)">
+            <div class="row">
+              <div class="col-md-1 events-time d-flex flex-column text-center">
+                <strong>{{monthNames[dataSource[i].creationDate.split("/")[0]]}}</strong>
+                {{dataSource[i].creationDate.split("/")[1]}}
+              </div>
+              <div class="col-md-8">
+                <p>{{dataSource[i].notificationContent}}</p>
+              </div>
+              <div class="col-md-2">
+                <div class="text-center">
+                  <p style="color:white;font-size: 13px;">{{dataSource[i].creationDate}}</p>
+                </div>
+                <!--              <div class="text-center"><p style="color:#797979;font-size: 13px;">{{dataSource[i].creationDate}}</p></div>-->
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="dx-card notification-card view rgba-white-slight waves-light" mdbWavesEffect style="background-color: darkgray;"
+        *ngIf="notification.status==1">
+        <a href="{{dataSource[i].notificationUrl}}" (click)="click(notification.id)">
+          <div class="row">
+            <div class="col-md-1 events-time d-flex flex-column text-center">
+              <strong>{{monthNames[dataSource[i].creationDate.split("/")[0]]}}</strong>
+              {{dataSource[i].creationDate.split("/")[1]}}
+            </div>
+            <div class="col-md-8">
+              <p>{{dataSource[i].notificationContent}}</p>
+            </div>
+            <div class="col-md-2">
+              <div class="text-center">
+                <p style="color:white;font-size: 13px;">{{dataSource[i].creationDate}}</p>
+              </div>
+              <!--              <div class="text-center"><p style="color:#797979;font-size: 13px;">{{dataSource[i].creationDate}}</p></div>-->
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+
+
+
+
+      </div>
+
+    </div>
+
+  </dx-scroll-view>
+</div>

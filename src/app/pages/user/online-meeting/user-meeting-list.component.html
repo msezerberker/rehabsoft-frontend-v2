@@ -1,0 +1,10 @@
+<h2 class="content-block">Görüşmeler</h2>
+<div class="content-block" style="height:'550px'">
+  <dx-scroll-view width="100%" height="550px">
+    <div class="dx-card responsive-paddings">
+      <div *ngFor="let meeting of dataSource; let i = index" style="margin-bottom: 15px;margin-top: 15px">
+        <app-online-meeting-block [isDoctor]="false" [meeting]="meeting" [with]="meeting.doctorUser" [meetingDate]="meeting.meetingDate" [meetingId]="meeting.id"></app-online-meeting-block>
+      </div>
+    </div>
+  </dx-scroll-view>
+</div>

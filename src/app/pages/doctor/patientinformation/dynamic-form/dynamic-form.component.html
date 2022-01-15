@@ -1,0 +1,83 @@
+<div>
+
+  <div class="dx-field">
+    <div class="dx-field-label"></div>
+    <div class="dx-field-value">
+      <dx-button icon="plus"
+                  text="Yeni Form-Anket Oluştur"
+                 (onClick)="btnClick()">
+      </dx-button>
+    </div>
+  </div>
+
+  <div class="dx-field">
+    <div class="dx-field-label"></div>
+    <div class="dx-field-value">
+      <dx-button icon="plus"
+                 text="Hazır Formlardan Gönder"
+                 (onClick)="openPopUp()">
+      </dx-button>
+    </div>
+  </div>
+
+  <h2>Anket-Form Talepleri</h2>
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="assignedFormList"
+    [remoteOperations]="true"
+    [showBorders]="true" height="300px">
+
+    <dxo-paging pageSize="15"></dxo-paging>
+
+    <dxi-column dataField="creationDate" caption="Gönderilme Tarihi" dataType="datetime" format="M/d/yyyy H:mm"></dxi-column>
+    <dxi-column dataField="formDynamic.title" caption="Form Başlığı"></dxi-column>
+    <dxi-column dataField="formDynamic.explanation" caption="Form Açıklaması"></dxi-column>
+    <dxi-column  dataField="(isFormAnswered) ? 'Cevaplandı' : 'Cevap Bekliyor!!!';" caption="Durum"></dxi-column>
+    <dxi-column type="buttons" alignment="center"  width= '100px' >
+      <dxi-button hint="Görüntüle" icon="fas fa-eye" [onClick]="viewForm"></dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+</div>
+
+<app-view-response-component></app-view-response-component>
+
+<dx-popup
+  [width]="660"
+  [height]="540"
+  [showTitle]="true"
+  [title]="'HAZIR FORMLAR'"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupVisible">
+
+  <div class="card-body" style="padding: 3px; background-color: #9EE2E9;">
+    <dx-toolbar style="padding: 3px; background-color: #9EE2E9;">
+      <dxi-item location="center" widget="dxButton" locateInMenu="never">
+        <div *dxTemplate>
+          <div class='toolbar-label'><b>Form Örnekleri</b> </div>
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+
+  <dx-data-grid
+    id="gridContainer2"
+    [dataSource]="formTemplateList"
+    [remoteOperations]="true"
+    [showBorders]="true">
+
+    <dxo-paging pageSize="15"></dxo-paging>
+
+    <dxi-column dataField="creationDate" caption="Oluşturulma Tarihi" dataType="datetime" format="M/d/yyyy H:mm"></dxi-column>
+    <dxi-column dataField="formDynamic.title" caption="Form Başlığı"></dxi-column>
+    <dxi-column dataField="formDynamic.explanation" caption="Form Açıklaması"></dxi-column>
+    <dxi-column type="buttons" alignment="center"  width= '100px' >
+      <dxi-button hint="Görüntüle" icon="fas fa-paper-plane" [onClick]="assignTemplate"></dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+
+</dx-popup>
+

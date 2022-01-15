@@ -1,0 +1,26 @@
+::ng-deep .dx-card .notification-card{
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
+  background-color: #3eb8b0;
+  margin: 2px 4px 7px 4px;
+  padding:3px;
+  height: 50px;
+}
+
+
+::ng-deep .events-time {
+  position: relative;
+  margin-right: 5px;
+  margin-left: 2px;
+  height: 100%;
+  line-height: 1.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #323531;
+}
+
+/* Link yazi */
+::ng-deep .dx-theme-generic-typography a {
+  color: white;
+}

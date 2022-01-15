@@ -1,0 +1,74 @@
+<h2 class="content-block">Profile</h2>
+
+<div class="content-block dx-card responsive-paddings">
+  <div class="form-avatar">
+  </div>
+</div>
+
+<div class="content-block dx-card responsive-paddings">
+  <dx-form id="form"
+    [formData]="userDetails"
+    labelLocation="top"
+    [colCountByScreen]="colCountByScreen"
+  >
+  </dx-form>
+<dx-button
+stylingMode="contained"
+text="Güncelle"
+type="success"
+[width]="120"
+style="color:black; background-color: #9EE2E9;"
+(onClick)="updateUserDetails()">
+</dx-button>
+  
+</div>
+
+
+
+
+<div class="content-block dx-card responsive-paddings">
+  <div class="card-body" style="padding: 2px; background-color: #9EE2E9;">
+
+    <dx-toolbar style="padding: 2px; background-color: #9EE2E9;">
+
+      <dxi-item location="center" widget="dxButton" locateInMenu="never">
+        <div *dxTemplate>
+        <b>Şifre Değişikliği</b> 
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+<br>
+  <dx-form [alignItemLabels]="true" [formData]="passwordForm" [disabled]="loading" [showValidationSummary]="true">
+
+    <dxi-item dataField="oldPassword" editorType="dxTextBox"
+      [editorOptions]="{ stylingMode: 'filled', placeholder: 'Eski şifreniz', mode: 'password' }">
+      <dxi-validation-rule type="required" message="Eski şifrenizi girmeniz gerekli"></dxi-validation-rule>
+      <dxo-label location="top" [visible]="true" text="Eski şifreniz"></dxo-label>
+    </dxi-item>
+
+    <dxi-item dataField="newPassword" editorType="dxTextBox"
+      [editorOptions]="{ stylingMode: 'filled', placeholder: 'Yeni Şifre', mode: 'password' }">
+      <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+      <dxo-label location="top" [visible]="true" text="Yeni Şifre"></dxo-label>
+    </dxi-item>
+
+    <dxi-item dataField="confirmedPassword" editorType="dxTextBox"
+      [editorOptions]="{ stylingMode: 'filled', placeholder: 'Yeni şifrenizi tekrar giriniz', mode: 'password' }">
+      <dxi-validation-rule type="required" message="Şifre gerekli"></dxi-validation-rule>
+      <dxi-validation-rule type="custom" message="Şifre uyuşmuyor" reevaluate="true"
+        [validationCallback]="confirmPassword"></dxi-validation-rule>
+      <dxo-label location="top" [visible]="true" text="Şifreyi Onayla"></dxo-label>
+    </dxi-item>
+
+
+
+
+    <dxi-item itemType="button" style="color:black; background-color: #9EE2E9;" [buttonOptions]="submitbuttonOptions"></dxi-item>
+
+
+
+  </dx-form>
+
+
+</div>

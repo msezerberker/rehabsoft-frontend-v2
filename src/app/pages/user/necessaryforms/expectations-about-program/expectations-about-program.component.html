@@ -1,0 +1,69 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+
+  <!-- 11. Programın amaçları ve beklentiler -->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="11. Programın amaçları ve beklentiler" [colCount]="1">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+
+      <dxi-item [alignItemLabels]="true" itemType="group">
+        <dxi-item itemType="group"
+                  name="otherOrthesis"
+                  *ngFor="let expectations of expectationsAboutProgramOptions; let i = index" [colCount]="2">
+
+          <dxi-item [alignItemLabels]="true" itemType="group">
+
+            <dxi-item [dataField]="'expectationsAboutProgramCollection[' + i + '].expectationContent'" editorType="dxTextArea"
+                      [editorOptions]="expectationsAboutProgramOptions[i][0]">
+              <dxi-validation-rule type="required" message="İlaç ismi gerekli"></dxi-validation-rule>
+              <dxo-label
+                [text]="(i + 1)+'. '" location="top" [visible]="true" >
+              </dxo-label>
+            </dxi-item>
+          </dxi-item>
+
+          <dxi-item [alignItemLabels]="true" itemType="group" >
+            <dxi-item itemType="button" horizontalAlignment="center" cssClass="delete-expectations-button" [buttonOptions]="expectationsAboutProgramOptions[i][1]">
+            </dxi-item>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item itemType="button"
+                  horizontalAlignment="center"
+                  cssClass="add-button"
+                  [buttonOptions]="addExpectationsAboutProgramButtonOptions">
+        </dxi-item>
+      </dxi-item>
+
+
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+    </dxi-item>
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

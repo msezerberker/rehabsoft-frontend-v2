@@ -1,0 +1,48 @@
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="otherOrthesisInfoCollection"
+    keyExpr="id"
+
+    [hoverStateEnabled]="true" [showBorders]="true"
+    [showColumnLines]="true" [showRowLines]="true" [rowAlternationEnabled]="false"
+    [export]="true" [groupPanel]="true">
+
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-scrolling mode="standart" columnRenderingMode="virtual"></dxo-scrolling>
+    <!-- Pagination start -->
+    <dxo-paging [pageSize]="8"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="[5, 10, 20, 50, 100]"></dxo-pager>
+    <dxo-filter-row [visible]="true" ></dxo-filter-row>
+    <!-- Pagination end -->
+
+    <dxi-column
+      dataField="orthesisName"
+      caption="Ortez İsmi"
+    ></dxi-column>
+    <dxi-column caption="Ortez Resmi" type="buttons" alignment="center"  width= '150px' >
+      <dxi-button
+        hint="Resmi Aç"
+        icon="fas fa-eye"
+        [visible]="true"
+        [onClick]="showImage">
+      </dxi-button>
+      <dxi-button
+        hint="Resmi İndir"
+        icon="fas fa-download"
+        [visible]="true"
+        [onClick]="downloadImage">
+      </dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+
+<dx-popup [width]='"100%"' [height]="'100%'" [showTitle]="true" [title]="title" [dragEnabled]="true" [resizeEnabled]="true"
+          [closeOnOutsideClick]="true" [(visible)]="isImagePopUpVisible" [position]="'top'">
+  <div *dxTemplate="let data of 'content'">
+    <app-asyn-image-component [src]="imageUrlToDownload"></app-asyn-image-component>
+  </div>
+</dx-popup>
+
+
+

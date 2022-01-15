@@ -1,0 +1,118 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+  <!--6. Doğum Sonrası Özellikleri-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="6. Doğum Sonrası Özellikleri" [colCount]="2">
+
+    <!--Left group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+
+      <dxi-item
+        dataField="isIntensiveCare"
+        editorType="dxRadioGroup"
+        [editorOptions]="isIntensiveCareOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Yoğun bakım/kuvöz"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="intensiveCare" editorType="dxNumberBox" [visible]="generalEvaluationForm.isIntensiveCare"
+                [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:10000, showSpinButtons:true}">
+        <dxi-validation-rule type="required" message="Doğum kilosu gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Yoğun bakım/kuvöz gün sayısı"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="oxygenSupport"
+        editorType="dxRadioGroup"
+        [editorOptions]="oxygenSupportOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Oksijen desteği"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isNewbornRetinopathy"
+        editorType="dxRadioGroup"
+        [editorOptions]="newbornRetinopathyOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Yenidoğan retinopatisi (ROP)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isHypoglycaemia"
+        editorType="dxRadioGroup"
+        [editorOptions]="isHypoglycaemiaOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Hipoglisemi"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+
+    <!--Right group-->
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item
+        dataField="isRespiratuvarDistressSyndrom"
+        editorType="dxRadioGroup"
+        [editorOptions]="isRespiratuvarDistressSyndromOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Respiratuvar Distres Sendromu"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isBronchopulmonaryDysplasia"
+        editorType="dxRadioGroup"
+        [editorOptions]="isBronchopulmonaryDysplasiaOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Bronkopulmoner Displazi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isHyperbilirubinemia"
+        editorType="dxRadioGroup"
+        [editorOptions]="isHyperbilirubinemiaOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Yenidoğan sarılığı (Hiperbilirubinemi)"></dxo-label>
+      </dxi-item>
+
+      <dxi-item
+        dataField="isSleptHospitalForHyperbilirubinemia"
+        editorType="dxRadioGroup"
+        [editorOptions]="isSleptHospitalForHyperbilirubinemiaOption" [visible]="generalEvaluationForm.isHyperbilirubinemia">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label [visible]="true" location="top" text="Yenidoğan sarılığı için hiç hastaneye yattı mı?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2" [visible]="generalEvaluationForm.isSleptHospitalForHyperbilirubinemia && generalEvaluationForm.isHyperbilirubinemia">
+        <dxi-item dataField="hyperbilirubinemia.hospitalDayTime" editorType="dxNumberBox"
+                  [editorOptions]="{ stylingMode: 'outlined', placeholder: '', min:0, max:10000, showSpinButtons:true}">
+          <dxi-validation-rule type="required" message="Bu alan gerek"></dxi-validation-rule>
+          <dxo-label [visible]="true" location="top" [text]="'Yenidoğan sarılığı için kaç gün hastanede yattı?'"></dxo-label>
+        </dxi-item>
+        <dxi-item
+          dataField="hyperbilirubinemia.isPhototeraphy"
+          editorType="dxRadioGroup"
+          [editorOptions]="isPhototeraphyOption">
+          <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+          <dxo-label [visible]="true" location="top" text="Işık tedavisi aldı mı?"></dxo-label>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

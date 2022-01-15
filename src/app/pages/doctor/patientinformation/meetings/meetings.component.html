@@ -1,0 +1,68 @@
+<h2 class="content-block">Görüşmeler</h2>
+<div class="content-block">
+  <dx-scroll-view width="100%" height="550px">
+    <div class="dx-card responsive-paddings">
+        <div style="display: grid;justify-content: right;align-content: center;">
+          <dx-button
+            icon="plus"
+            type="success"
+            text="Yeni Görüşme Ekle"
+            (onClick)="addMeetingModalButtonClicked()">
+          </dx-button>
+        </div>
+        <div *ngFor="let meeting of dataSource; let i = index" style="margin-bottom: 15px;margin-top: 15px">
+          <app-online-meeting-block [meeting]="meeting" (delClick)="delIconClicked($event)" [with]="meeting.patientUser" [meetingDate]="meeting.meetingDate" [meetingId]="meeting.id"></app-online-meeting-block>
+        </div>
+    </div>
+  </dx-scroll-view>
+</div>
+
+
+
+
+<dx-popup
+  [width]="460"
+  [height]="340"
+  [showTitle]="true"
+  [disabled]="isLoading"
+  [title]="'Yeni Görüşme Ekle'"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="popupVisible">
+
+  <div class="card-body" style="padding: 3px;">
+    <dx-form #dxAddMeetingForm [formData]="addedMeeting" [colCount]="1">
+      <dxi-item dataField="meetingDate" editorType="dxDateBox"
+                [editorOptions]='{ stylingMode: "outlined", showClearButton:"true",useMaskBehavior:"true",displayFormat:"shortdate",
+                placeholder:"Görüşme Tarihi", min:minDate,type:"datetime"}'>
+        <dxi-validation-rule type="required" message="Görüşme tarihi gerekli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Görüşme Tarihi"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="patientId" editorType="dxSelectBox" [editorOptions]="{ stylingMode: 'filled', placeholder: 'Seçiniz...', searchEnabled:true,
+                             dataSource: patientsSelectBox, valueExpr: 'value', displayExpr: 'name', disabled:true}">
+        <dxi-validation-rule type="required" message="Görüşme Yapılacak Kişi">
+        </dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Görüşme Yapılacak Kişi"></dxo-label>
+      </dxi-item>
+
+    </dx-form>
+  </div>
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar= "bottom"
+    alignment="right"
+    location="after"
+    [options]="cancelAddMeetingButtonOption">
+  </dxi-toolbar-item>
+
+  <dxi-toolbar-item
+    widget="dxButton"
+    toolbar= "bottom"
+    alignment="right"
+    location="after"
+    [options]="submitMeetingButtonOption">
+  </dxi-toolbar-item>
+
+</dx-popup>

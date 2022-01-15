@@ -1,0 +1,516 @@
+
+<dx-form [formData]="generalEvaluationForm" [disabled]="loading"
+         [showValidationSummary]="true" >
+
+
+
+  <!--8. Uygulanan Tedaviler-->
+  <dxi-item [alignItemLabels]="true" itemType="group" caption="8. Uygulanan Tedaviler">
+
+    <!--Botox-->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Botilinum toksin (Botox) enjeksiyonu">
+      <dxi-item
+        dataField="isBotoxTreatment"
+        editorType="dxRadioGroup"
+        [editorOptions]="isBotoxTreatmentOption">
+        <dxi-validation-rule type="custom" message="Bu alan gerekli" [validationCallback]="checkIsNull"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="Botilinum toksin (Botox) enjeksiyonu oldu mu?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item dataField="botoxTreatment.lastBotoxDate" editorType="dxDateBox" [visible]="generalEvaluationForm.isBotoxTreatment"
+                [editorOptions]="lastBotoxDateOption">
+        <dxi-validation-rule type="required" message="Botoks tarihi girilmeli"></dxi-validation-rule>
+        <dxo-label location="top" [visible]="true" text="En son ne zaman?"></dxo-label>
+      </dxi-item>
+
+      <dxi-item [alignItemLabels]="true" itemType="group" [visible]="generalEvaluationForm.isBotoxTreatment">
+        <dxo-label location="top" [visible]="true" text="Botoks Enjeksiyon Raporu"></dxo-label>
+        <dxi-item [template]="'botoxFileUploaderTemplate'">
+        </dxi-item>
+        <!--        <input type="file" (change)="uploadBotoxReport($event)">-->
+        <div *dxTemplate="let data of 'botoxFileUploaderTemplate'">
+          <div class="fileuploader-container">
+            <dx-file-uploader #dxFileUploaderComponentBotoxReport
+                              selectButtonText="Raporu resim olarak yükleyin"
+                              labelText=""
+                              accept="image/*"
+                              uploadedMessage="Başarıyla yüklendi"
+                              uploadFailedMessage="Yükleme başarısız"
+                              [multiple]="false"
+                              uploadMode="useForm"
+                              (onValueChanged)="uploadBotoxReport($event)"
+                              [maxFileSize]="10000000"
+            >
+            </dx-file-uploader>
+          </div>
+        </div>
+      </dxi-item>
+
+    </dxi-item>
+
+    <!-- Gecirilen cerrahiler -->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Geçirilen Cerrahiler" >
+      <!--Bir cerrahi datasi start-->
+
+      <dxi-item itemType="group"
+                name="appliedSurgeries"
+                *ngFor="let appliedSurgery of appliedSurgeryOptions; let i = index" [colCount]="4">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+
+          <dxi-item [dataField]="'appliedSurgeryCollection[' + i + '].surgeryName'" editorType="dxSelectBox"
+                    [editorOptions]="appliedSurgeryOptions[i][0]">
+            <dxi-validation-rule type="required" message="Cerrahinin adı gerekli"></dxi-validation-rule>
+            <dxo-label
+              [text]="(i + 1)+'. '" location="top" [visible]="false" >
+            </dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item [dataField]="'appliedSurgeryCollection[' + i + '].applyingDate'" editorType="dxDateBox"
+                    [editorOptions]="appliedSurgeryOptions[i][1]">
+            <dxi-validation-rule type="required" message="Uygulanma tarihi gerekli"></dxi-validation-rule>
+            <dxo-label location="top" [visible]="false" text="Uygulanma Tarihi"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item [dataField]="'appliedSurgeryCollection[' + i + '].epicrisisImageUrl'" [template]="'appliedsSuergeryEpicrysisTemplate'+i">
+          </dxi-item>
+          <div *dxTemplate="let data of 'appliedsSuergeryEpicrysisTemplate'+i">
+            <div class="fileuploader-container-2">
+              <!--              <input type="file" (change)="uploadAppliedSurgeryReport($event)">-->
+              <dx-file-uploader
+                selectButtonText="Varsa epikriz resimini yükleyin"
+                labelText=""
+                accept="image/*"
+                uploadedMessage="Başarıyla yüklendi"
+                uploadFailedMessage="Yükleme başarısız"
+                [multiple]="false"
+                uploadMode="useForm"
+                (onValueChanged)="uploadAppliedSurgeryReport($event, i)"
+                [maxFileSize]="10000000"
+              >
+              </dx-file-uploader>
+            </div>
+          </div>
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group" >
+          <dxi-item itemType="button" horizontalAlignment="center" cssClass="delete-surgery-button" [buttonOptions]="appliedSurgeryOptions[i][2]">
+          </dxi-item>
+        </dxi-item>
+
+      </dxi-item>
+      <!--Bir cerrahi datasi end-->
+
+      <dxi-item itemType="button"
+                horizontalAlignment="center"
+                cssClass="add-button"
+                [buttonOptions]="addAppliedSurgeryButtonOptions">
+      </dxi-item>
+    </dxi-item>
+    <!-- Gecirilen cerrahiler -->
+
+
+    <!-- Orthesis -->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Kullanılan Ortezler">
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group">
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisTabanlikCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Tabanlık"></dxo-label>
+          </dxi-item>
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftTabanlikCheckBoxOptions" [visible]="isOrthesisMap[0].value">
+            <dxo-label location="left" [visible]="false" text="Tabanlık" >
+            </dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightTabanlikOrthesisCheckBoxOptions" [visible]="isOrthesisMap[0].value">
+            <dxo-label location="left" [visible]="false" text="Tabanlık"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisTopukKapiCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Topuk Kapı"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisTopukKapiCheckBoxOptions" [visible]="isOrthesisMap[1].value">
+            <dxo-label location="left" [visible]="false" text="Topuk Kapı"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisTopukKapiCheckBoxOptions" [visible]="isOrthesisMap[1].value">
+            <dxo-label location="left" [visible]="false" text="Topuk Kapı"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisAyakBilegiCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Ayak bileği hizasında ortez (supra-malleoler)"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisAyakBilegiCheckBoxOptions" [visible]="isOrthesisMap[2].value">
+            <dxo-label location="left" [visible]="false" text="Ayak bileği hizasında ortez (supra-malleoler)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisAyakBilegiCheckBoxOptions" [visible]="isOrthesisMap[2].value">
+            <dxo-label location="left" [visible]="false" text="Ayak bileği hizasında ortez (supra-malleoler)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisSabitAyakCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Sabit Ayak-ayak bileği ortezi (AFO)"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisSabitAyakCheckBoxOptions" [visible]="isOrthesisMap[3].value">
+            <dxo-label location="left" [visible]="false" text="Sabit Ayak-ayak bileği ortezi (AFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisSabitAyakCheckBoxOptions" [visible]="isOrthesisMap[3].value">
+            <dxo-label location="left" [visible]="false" text="Sabit Ayak-ayak bileği ortezi (AFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisEklemliAyakCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Eklemli Ayak-ayak bileği ortezi (eklemli AFO)"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisEklemliAyakCheckBoxOptions" [visible]="isOrthesisMap[4].value">
+            <dxo-label location="left" [visible]="false" text="Eklemli Ayak-ayak bileği ortezi (eklemli AFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisEklemliAyakCheckBoxOptions" [visible]="isOrthesisMap[4].value">
+            <dxo-label location="left" [visible]="false" text="Eklemli Ayak-ayak bileği ortezi (eklemli AFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisDinamikAyakCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Dinamik ayak ayak bileği ortezi (DAFO)"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisDinamikAyakCheckBoxOptions" [visible]="isOrthesisMap[5].value">
+            <dxo-label location="left" [visible]="false" text="Dinamik ayak ayak bileği ortezi (DAFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisDinamikAyakCheckBoxOptions" [visible]="isOrthesisMap[5].value">
+            <dxo-label location="left" [visible]="false" text="Dinamik ayak ayak bileği ortezi (DAFO)"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisBacakGeceCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Bacaklar için gece splinti"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisBacakGeceCheckBoxOptions" [visible]="isOrthesisMap[6].value">
+            <dxo-label location="left" [visible]="false" text="Bacaklar için gece splinti"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisBacakGeceCheckBoxOptions" [visible]="isOrthesisMap[6].value">
+            <dxo-label location="left" [visible]="false" text="Bacaklar için gece splinti"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisImmobilizerCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="İmmobilizer"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisImmobilizerCheckBoxOptions" [visible]="isOrthesisMap[7].value">
+            <dxo-label location="left" [visible]="false" text="İmmobilizer"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisImmobilizerCheckBoxOptions" [visible]="isOrthesisMap[7].value">
+            <dxo-label location="left" [visible]="false" text="İmmobilizer"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisKalcaAteliCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Kalça ateli"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisGovdeKorsesiCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Gövde korsesi"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisDirsekSiplintiCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Dirsek splinti"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisDirsekSiplintiCheckBoxOptions" [visible]="isOrthesisMap[10].value">
+            <dxo-label location="left" [visible]="false" text="Dirsek splinti"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisDirsekSiplintiCheckBoxOptions" [visible]="isOrthesisMap[10].value">
+            <dxo-label location="left" [visible]="false" text="Dirsek splinti"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+      <!--one orthesis item-->
+      <dxi-item itemType="group" colCount="2">
+        <dxi-item itemType="group" colCount="1">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="orthesisBasParmakCheckBoxOptions">
+            <dxo-label location="left" [visible]="true" text="Baş parmak ortezi"></dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+        <dxi-item itemType="group" colCount="2">
+
+          <dxi-item editorType="dxCheckBox" [editorOptions]="leftOrthesisBasParmakCheckBoxOptions" [visible]="isOrthesisMap[11].value">
+            <dxo-label location="left" [visible]="false" text="Baş parmak ortezi"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+          <dxi-item editorType="dxCheckBox" [editorOptions]="rightOrthesisBasParmakCheckBoxOptions" [visible]="isOrthesisMap[11].value">
+            <dxo-label location="left" [visible]="false" text="Baş parmak ortezi"></dxo-label>
+            <dxi-validation-rule type="custom" message="Sağ veya sol seçilmeli" [validationCallback]="checkIsFalseBothLeftAndRightForValidation"></dxi-validation-rule>
+          </dxi-item>
+
+        </dxi-item>
+      </dxi-item>
+      <!--one orthesis item-->
+
+
+    </dxi-item>
+    <!-- Orthesis -->
+
+    <!-- Other Orthesis -->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Diğer Kullanılan Ortezler" >
+      <!--Bir Orthesis start-->
+      <!--      <h5>Eğer kullanılan ortez yukarda yoksa, burada ekleyebilirsiniz</h5>-->
+      <dxi-item itemType="group"
+                name="otherOrthesis"
+                *ngFor="let otherOrthesis of otherOrthesisOptions; let i = index" [colCount]="3">
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+
+          <dxi-item [dataField]="'otherOrthesisInfoCollection[' + i + '].orthesisName'" editorType="dxTextBox"
+                    [editorOptions]="otherOrthesisOptions[i][0]">
+            <dxi-validation-rule type="required" message="Ortez Tanımı"></dxi-validation-rule>
+            <dxo-label
+              [text]="(i + 1)+'. '" location="top" [visible]="false" >
+            </dxo-label>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group">
+          <dxi-item [dataField]="'otherOrthesisInfoCollection[' + i + '].orthesisUrl'" [template]="'otherOrthesisTemplate'">
+          </dxi-item>
+          <div *dxTemplate="let data of 'otherOrthesisTemplate'">
+            <div class="fileuploader-container-3">
+              <dx-file-uploader selectButtonText="Varsa resimini yükleyin"
+                                labelText=""
+                                accept="image/*"
+                                uploadedMessage="Başarıyla yüklendi"
+                                uploadFailedMessage="Yükleme başarısız"
+                                [multiple]="false"
+                                uploadMode="useForm"
+                                (onValueChanged)="uploadOtherOrthesisImage($event, i)"
+                                [maxFileSize]="10000000"
+              >
+                <!-- [value]="[generalEvaluationForm.otherOrthesisInfoCollection[i].orthesisImageFile]"-->
+              </dx-file-uploader>
+            </div>
+          </div>
+        </dxi-item>
+
+        <dxi-item [alignItemLabels]="true" itemType="group" >
+          <dxi-item itemType="button" horizontalAlignment="center" cssClass="delete-surgery-button" [buttonOptions]="otherOrthesisOptions[i][1]">
+          </dxi-item>
+        </dxi-item>
+
+      </dxi-item>
+
+      <!--Bir Orthesis start-->
+
+      <dxi-item itemType="button"
+                horizontalAlignment="center"
+                cssClass="add-button"
+                [buttonOptions]="addOtherOrthesisButtonOptions">
+      </dxi-item>
+    </dxi-item>
+    <!-- Other Orthesis -->
+
+
+
+
+    <!-- Used Medicine -->
+    <dxi-item [alignItemLabels]="true" itemType="group" caption="Kullanılan İlaçlar" [colCount]="2" >
+
+      <!--left-->
+      <dxi-item [alignItemLabels]="true" itemType="group">
+        <dxi-item itemType="group"
+                  name="otherOrthesis"
+                  *ngFor="let usedMedicine of usedMedicineOptions; let i = index" [colCount]="2">
+
+          <dxi-item [alignItemLabels]="true" itemType="group">
+
+            <dxi-item [dataField]="'usedMedicineCollection[' + i + '].medicineName'" editorType="dxTextBox"
+                      [editorOptions]="usedMedicineOptions[i][0]">
+              <dxi-validation-rule type="required" message="İlaç ismi gerekli"></dxi-validation-rule>
+              <dxo-label
+                [text]="(i + 1)+'. '" location="top" [visible]="false" >
+              </dxo-label>
+            </dxi-item>
+
+          </dxi-item>
+
+          <dxi-item [alignItemLabels]="true" itemType="group" >
+            <dxi-item itemType="button" horizontalAlignment="center" cssClass="delete-medicine-button" [buttonOptions]="usedMedicineOptions[i][1]">
+            </dxi-item>
+          </dxi-item>
+
+        </dxi-item>
+
+        <dxi-item itemType="button"
+                  horizontalAlignment="center"
+                  cssClass="add-button"
+                  [buttonOptions]="addUsedMedicineButtonOptions">
+        </dxi-item>
+      </dxi-item>
+
+      <!--right-->
+      <dxi-item [alignItemLabels]="true" itemType="group">
+        <div style="width: 50%"></div>
+      </dxi-item>
+    </dxi-item>
+    <!-- Used Medicine -->
+
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="2">
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button"  horizontalAlignment="left" [buttonOptions]="backbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="nextbuttonOptions" >
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+
+</dx-form>

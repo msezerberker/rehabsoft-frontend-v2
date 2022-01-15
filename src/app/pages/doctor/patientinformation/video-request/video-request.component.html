@@ -1,0 +1,81 @@
+<div class="container" id="video-grid">
+
+
+  <div class="card-body" style="padding: 3px; background-color: #9EE2E9;">
+
+    <dx-toolbar style="padding: 3px; background-color: #9EE2E9;">
+
+      <dxi-item location="center" widget="dxButton" locateInMenu="never">
+        <div *dxTemplate>
+          <div class='toolbar-label'><b>HASTADAN VİDEO TALEBİ</b> </div>
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+
+
+
+<dx-form id="form" [formData]="videoRequestDto">
+
+  <dxi-item itemType="group" cssClass="first-group">
+    <dxi-item itemType="group" cssClass="second-group" [colCount]="1">
+      <dxi-item dataField="requestTitle">
+        <dxo-label location="top" [visible]="true" text="Video Başlığı"></dxo-label>
+      </dxi-item>
+      <dxi-item dataField="requestContent" [colSpan]="2" editorType="dxTextArea" [editorOptions]="{ height: 140 }">
+        <dxo-label location="top" [visible]="true" text="İstenilen Videonun İçeriği(Detay)"></dxo-label>
+      </dxi-item>
+    </dxi-item>
+  </dxi-item>
+
+
+  <!--Button Groups-->
+  <dxi-item [alignItemLabels]="true" itemType="group" [colCount]="1">
+
+    <dxi-item [alignItemLabels]="true" itemType="group">
+      <dxi-item itemType="button" horizontalAlignment="right" [buttonOptions]="submitbuttonOptions">
+      </dxi-item>
+    </dxi-item>
+
+  </dxi-item>
+
+</dx-form>
+
+</div>
+
+<div class="container" id="video-grid">
+
+<div class="card-body" style="padding: 3px; background-color: #9EE2E9;">
+
+  <dx-toolbar style="padding: 3px; background-color: #9EE2E9;">
+
+    <dxi-item location="center" widget="dxButton" locateInMenu="never">
+      <div *dxTemplate>
+        <div class='toolbar-label'><b>VİDEO TALEBİ GEÇMİŞİ</b> </div>
+      </div>
+    </dxi-item>
+  </dx-toolbar>
+</div>
+
+
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="videoRequestList"
+    [remoteOperations]="true"
+    [showBorders]="true">
+
+    <dxo-paging pageSize="15"></dxo-paging>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+
+    <dxi-column dataField="requestTitle" caption="Video Başlığı"></dxi-column>
+    <dxi-column dataField="requestContent" caption="Video İçeriği"></dxi-column>
+    <dxi-column type="buttons" alignment="center"  width= '100px' >
+      <dxi-button hint="Cevabı Görüntüle" icon="fas fa-eye"  [visible]="isResponseNotNull" [onClick]="openPopUp"></dxi-button>
+    </dxi-column>
+
+
+   <!-- <dxo-master-detail [enabled]="true" template="masterDetail"></dxo-master-detail> -->
+</dx-data-grid>
+</div>
+
+<app-view-response-component></app-view-response-component>
