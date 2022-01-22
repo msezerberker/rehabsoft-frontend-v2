@@ -45,7 +45,7 @@ export class FormDynamicService {
   }
 
   findAssignFormById(id : string){
-    return this.http.get<AssignedForm>(`${environment.API_BASE_PATH}/form-dynamic/get-assigned-form/${id}`)
+    return this.http.get<AssignedForm>(`${environment.API_BASE_PATH}/form-dynamic/get-assigned-form/${id}`);
   }
 
   answerTheForm(assignedForm: AssignedForm, formID: string){

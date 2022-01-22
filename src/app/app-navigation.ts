@@ -62,6 +62,11 @@ export const doctorNavigation = [
     icon:"paste"
   },
   {
+    text: 'Hazır Sorular',
+    path: '/doctor/soru-templates',
+    icon:"paste"
+  },
+  {
     text: 'Görüşmeler',
     path: '/doctor/online-meeting/list',
     icon:"tel"

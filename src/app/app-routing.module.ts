@@ -124,6 +124,10 @@ import {ExerciseFormModalComponent} from "./pages/doctor/patientinformation/exer
 import {ViewExerciseProgramsComponent} from "./shared/components/view-exercise-program/view-exercise-programs.component";
 import {ViewExerciseListComponent} from "./shared/components/view-exercise-program/view-exercise-list/view-exercise-list.component";
 import {PhysiotherapyProgramComponent} from "./pages/user/physiotherapy-program/physiotherapy-program.component";
+import {SoruTemplatesComponent} from "./pages/doctor/soru-templates/soru-templates.component";
+import {SoruViewTemplateComponent} from "./pages/doctor/soru-templates/soru-view-template/soru-view-template.component";
+import {SoruCreateTemplateComponent} from "./pages/doctor/soru-templates/soru-create-template/soru-create-template.component";
+import {SoruDefaultValueDatagridComponent} from "./pages/doctor/soru-templates/soru-create-template/soru-default-value-datagrid/soru-default-value-datagrid.component";
 
 
 
@@ -209,6 +213,9 @@ const routes: Routes = [
       { path: 'form-templates', component: FormTemplatesComponent},
       { path: 'view-template/:formID', component: ViewTemplateComponent},
       { path: 'create-template', component: CreateTemplateComponent},
+      { path: 'soru-templates', component: SoruTemplatesComponent},
+      { path: 'soru-view-template/:soruID', component: SoruViewTemplateComponent},
+      { path: 'soru-create-template', component: SoruCreateTemplateComponent},
       { path: 'online-meeting',
         canActivate: [AuthGuard],
         data: { roles: [Role.Doctor, Role.User]},

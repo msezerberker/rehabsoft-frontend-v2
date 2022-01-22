@@ -1,0 +1,45 @@
+
+<div class="container" id="form-grid">
+
+  <div class="dx-field">
+    <div class="dx-field-label"></div>
+    <div class="dx-field-value">
+      <dx-button icon="plus"
+                 text="Soru Örneği Oluştur"
+                 (onClick)="btnClick()">
+      </dx-button>
+    </div>
+  </div>
+
+  <div class="card-body" style="padding: 3px; background-color: #9EE2E9;">
+
+    <dx-toolbar style="padding: 3px; background-color: #9EE2E9;">
+
+      <dxi-item location="center" widget="dxButton" locateInMenu="never">
+        <div *dxTemplate>
+          <div class='toolbar-label'><b>Soru Örnekleri</b> </div>
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="soruTemplateList"
+    [remoteOperations]="true"
+    [showBorders]="true">
+
+    <dxo-paging pageSize="15"></dxo-paging>
+
+    <dxi-column dataField="creationDate" caption="Oluşturulma Tarihi" dataType="datetime" format="M/d/yyyy H:mm"></dxi-column>
+    <dxi-column dataField="soruDynamic.title" caption="Soru Başlığı"></dxi-column>
+    <dxi-column dataField="soruDynamic.explanation" caption="Soru Açıklaması"></dxi-column>
+    <dxi-column type="buttons" alignment="center"  width= '100px' >
+      <dxi-button hint="Görüntüle" icon="fas fa-eye" [onClick]="viewSoru"></dxi-button>
+    </dxi-column>
+
+  </dx-data-grid>
+</div>
+
+
+

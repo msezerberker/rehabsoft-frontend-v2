@@ -39,11 +39,19 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireDatabaseModule} from "@angular/fire/database";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {AngularFireMessagingModule} from "@angular/fire/messaging";
+import { SoruTemplatesComponent } from './pages/doctor/soru-templates/soru-templates.component';
+import { SoruCreateTemplateComponent } from './pages/doctor/soru-templates/soru-create-template/soru-create-template.component';
+import { SoruViewTemplateComponent } from './pages/doctor/soru-templates/soru-view-template/soru-view-template.component';
+import { SoruDefaultValueDatagridComponent } from './pages/doctor/soru-templates/soru-create-template/soru-default-value-datagrid/soru-default-value-datagrid.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SoruTemplatesComponent,
+    SoruCreateTemplateComponent,
+    SoruViewTemplateComponent,
+    SoruDefaultValueDatagridComponent
     ],
   imports: [
     BrowserModule,
