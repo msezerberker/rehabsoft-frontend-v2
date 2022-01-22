@@ -252,7 +252,7 @@ const routes: Routes = [
     MDBBootstrapModule, WavesModule, DxButtonModule, DxToolbarModule, DxPopupModule, DxTabPanelModule, DxScrollViewModule, DxoItemDraggingModule, DxListModule, DxTooltipModule, DxTextBoxModule,
     DxDateBoxModule, DxSchedulerModule],
 
-  exports: [RouterModule],
+  exports: [RouterModule, DefaultValueDataGridComponent],
   declarations: [
     PagesComponent, DoctorCreateExerciseComponent, VideoPlayerComponent,AdminsCrudComponent,
     NewAccountComponent,NewDoctorAccountComponent,
