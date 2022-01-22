@@ -10,6 +10,7 @@ import {SoruField} from "../../../../models/dynamicsoru/sorufield";
 import {SoruTemplate} from "../../../../models/dynamicsoru/sorutemplate";
 import {SoruDynamic} from "../../../../models/dynamicsoru/sorudynamic";
 import {SoruFieldDefaultValue} from "../../../../models/dynamicsoru/sorufielddefaultvalue";
+import {FormFieldDefaultValue} from "../../../../models/dynamicform/formfielddefaultvalue";
 
 @Component({
   selector: 'app-soru-create-template',
@@ -19,7 +20,7 @@ import {SoruFieldDefaultValue} from "../../../../models/dynamicsoru/sorufielddef
 export class SoruCreateTemplateComponent implements OnInit {
 
   dataSource: SoruField[];
-  soruFieldDefaultValueMap: any = new Map();
+  formFieldDefaultValueMap: any = new Map();
   soruFieldSelectBoxElements: string[];
   showDragIcons: boolean;
   soruTitle: string;
@@ -37,7 +38,7 @@ export class SoruCreateTemplateComponent implements OnInit {
     this.soruFieldSelectBoxElements = ['METIN', 'SAYISAL', 'EVET_HAYIR', 'SECMELI', 'COKLU_SECMELI'];
     this.soruTitle = '';
     this.soruExplanation = '';
-    this.soruFieldDefaultValueMap = new Map();
+    this.formFieldDefaultValueMap = new Map();
     this.soruTemplate = new SoruTemplate();
     this.soruTemplate.soruDynamic = new SoruDynamic();
 
@@ -64,12 +65,12 @@ export class SoruCreateTemplateComponent implements OnInit {
     let i = 1;
     for(let field of this.dataSource){
       if(field.fieldType == 'SECMELI' || field.fieldType == 'COKLU_SECMELI'){
-        if(this.soruFieldDefaultValueMap[field.key].length < 1 || this.soruFieldDefaultValueMap[field.key] === undefined){
+        if(this.formFieldDefaultValueMap[field.key].length < 1 || this.formFieldDefaultValueMap[field.key] === undefined){
           notify("HATA: SECMELI ve COKLU_SECMELI soru tiplerinin şıkları boş bırakılamaz!!!", "error");
           return;
         }
         else{
-          field.soruFieldDefaultValueCollection = this.soruFieldDefaultValueMap[field.key];
+          field.soruFieldDefaultValueCollection = this.formFieldDefaultValueMap[field.key];
         }
       }
       field.fieldOrder = i;
@@ -124,7 +125,7 @@ export class SoruCreateTemplateComponent implements OnInit {
 
   onInitNewRow = (event) =>{
     event.data.key = new Date().valueOf().toString();
-    this.soruFieldDefaultValueMap[event.data.key] = Array<SoruFieldDefaultValue>();
+    this.formFieldDefaultValueMap[event.data.key] = Array<FormFieldDefaultValue>();
   }
 
   submit = () =>{

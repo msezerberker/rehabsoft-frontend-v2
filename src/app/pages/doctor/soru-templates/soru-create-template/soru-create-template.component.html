@@ -49,7 +49,7 @@
 
     <div  *dxTemplate="let order of 'detail'" >
       <div *ngIf="isEnabled(order.key.key)">
-        <app-soru-default-value-data-grid [key]="order.key.key" [soruFieldDefaultValueMap]="soruFieldDefaultValueMap" [dataSource]="soruFieldDefaultValueMap[order.key.key]"></app-soru-default-value-data-grid>
+        <app-default-value-data-grid [key]="order.key.key" [formFieldDefaultValueMap]="formFieldDefaultValueMap" [dataSource]="formFieldDefaultValueMap[order.key.key]"></app-default-value-data-grid>
       </div>
     </div>
   </dx-data-grid>

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
 import {SoruFieldDefaultValue} from '../../../../../models/dynamicsoru/sorufielddefaultvalue';
+import {FormFieldDefaultValue} from "../../../../../models/dynamicform/formfielddefaultvalue";
 
 @Component({
   selector: 'app-soru-default-value-datagrid',
@@ -10,17 +11,18 @@ import {SoruFieldDefaultValue} from '../../../../../models/dynamicsoru/sorufield
 export class SoruDefaultValueDatagridComponent implements AfterViewInit {
 
   @Input()
-  soruFieldDefaultValueMap: any;
+  @Input()
+  formFieldDefaultValueMap: any;
 
   @Input()
-  key: number;
+  key:number;
 
   @Input()
-  dataSource: SoruFieldDefaultValue[];
-  defaultValue: SoruFieldDefaultValue;
+  dataSource: FormFieldDefaultValue[];
+  defaultValue :FormFieldDefaultValue;
 
   constructor(){
-    this.defaultValue = new SoruFieldDefaultValue();
+    this.defaultValue = new FormFieldDefaultValue();
   }
 
   ngAfterViewInit() {
@@ -32,8 +34,8 @@ export class SoruDefaultValueDatagridComponent implements AfterViewInit {
       return;
     }
 
-    this.soruFieldDefaultValueMap[this.key].push(this.defaultValue);
-    this.defaultValue = new SoruFieldDefaultValue();
+    this.formFieldDefaultValueMap[this.key].push(this.defaultValue);
+    this.defaultValue = new FormFieldDefaultValue();
 
   }
 
