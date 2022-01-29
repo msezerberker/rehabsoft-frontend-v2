@@ -131,6 +131,9 @@ import {SoruDefaultValueDatagridComponent} from "./pages/doctor/soru-templates/s
 import {DynamicSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/dynamic-soru.component";
 import {AssignSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/assign-soru/assign-soru.component";
 import {ViewSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/view-soru/view-soru.component";
+import {DynamicSoruRequestComponent} from "./pages/user/dynamic-soru-request/dynamic-soru-request.component";
+import {AnswerDynamicSoruComponent} from "./pages/user/dynamic-soru-request/answer-dynamic-soru/answer-dynamic-soru.component";
+import {ViewDynamicSoruComponent} from "./pages/user/dynamic-soru-request/view-dynamic-soru/view-dynamic-soru.component";
 
 
 
@@ -157,6 +160,9 @@ const routes: Routes = [
       { path: 'dynamic-form-request', component: DynamicFormRequestComponent},
       { path: 'answer-dynamic-form/:formID', component: AnswerDynamicFormComponent},
       { path: 'view-dynamic-form/:formID', component: ViewDynamicFormComponent},
+      { path: 'dynamic-soru-request', component: DynamicSoruRequestComponent},
+      { path: 'answer-dynamic-soru/:soruID', component: AnswerDynamicSoruComponent},
+      { path: 'view-dynamic-soru/:soruID', component: ViewDynamicSoruComponent},
       { path: 'online-meeting',
         canActivate: [AuthGuard],
         data: { roles: [Role.User]},

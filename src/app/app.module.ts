@@ -47,6 +47,9 @@ import { DynamicSoruComponent } from './pages/doctor/patientinformation/dynamic-
 import { AssignSoruComponent } from './pages/doctor/patientinformation/dynamic-soru/assign-soru/assign-soru.component';
 import { ViewSoruComponent } from './pages/doctor/patientinformation/dynamic-soru/view-soru/view-soru.component';
 import { DefaultValueDataGridddComponent } from './pages/doctor/patientinformation/dynamic-soru/assign-soru/default-value-data-griddd/default-value-data-griddd.component';
+import { DynamicSoruRequestComponent } from './pages/user/dynamic-soru-request/dynamic-soru-request.component';
+import { ViewDynamicSoruComponent } from './pages/user/dynamic-soru-request/view-dynamic-soru/view-dynamic-soru.component';
+import { AnswerDynamicSoruComponent } from './pages/user/dynamic-soru-request/answer-dynamic-soru/answer-dynamic-soru.component';
 
 
 @NgModule({
@@ -59,7 +62,10 @@ import { DefaultValueDataGridddComponent } from './pages/doctor/patientinformati
     DynamicSoruComponent,
     AssignSoruComponent,
     ViewSoruComponent,
-    DefaultValueDataGridddComponent
+    DefaultValueDataGridddComponent,
+    DynamicSoruRequestComponent,
+    ViewDynamicSoruComponent,
+    AnswerDynamicSoruComponent
     ],
   imports: [
     BrowserModule,

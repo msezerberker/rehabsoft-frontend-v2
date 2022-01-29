@@ -1,0 +1,65 @@
+<div class="dx-fieldset" *ngFor="let item of dataSource">
+  <div class="dx-field" *ngIf="item.fieldType == 'METIN'">
+    <div class="dx-field-label-location-top">Metin {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-text-box
+        [disabled] = "true"
+        [showClearButton]="true"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-text-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'SAYISAL'" >
+    <div class="dx-field-label-location-top">Number {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-number-box
+        [disabled] = "true"
+        [showSpinButtons]="true"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-number-box>
+    </div>
+  </div>
+  <div class="dx-field"  *ngIf="item.fieldType == 'EVET_HAYIR'">
+    <div class="dx-field-label-location-top">Select Yes-No {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-select-box
+        [disabled] = "true"
+        [items]="['EVET','HAYIR']"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-select-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'SECMELI'">
+    <div class="dx-field-label-location-top">Select {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-select-box
+        [items] = "[answers[item.fieldOrder-1]]"
+        [disabled] = "true"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-select-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'COKLU_SECMELI'">
+    <div class="dx-field-label-location-top">Tag {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-tag-box
+        [disabled] = "true"
+        [(value)]="answers[item.fieldOrder-1]"
+        placeholder="..."
+      ></dx-tag-box>
+    </div>
+  </div>
+</div>
+
+<div class="dx-field" style="margin-right: 60px">
+  <div class="dx-field-label"></div>
+  <div class="dx-field-value">
+    <dx-button icon="arrowright"
+               text="Geri Dön"
+               (onClick)="btnClick()">
+    </dx-button>
+  </div>
+</div>
+
+
+<!-- [displayExpr]="displayExpr" -->
