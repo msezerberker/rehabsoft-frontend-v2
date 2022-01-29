@@ -22,6 +22,7 @@ export class PatientinformationComponent implements OnInit {
   videoRequestUrl:string;
   messageUrl:string;
   dynamicFormsUrl:string;
+  dynamicSoruUrl:string;
   exerciseProgramsUrl:string;
   onlineMeetingsUrl:string;
   patient:Patient;
@@ -32,6 +33,7 @@ export class PatientinformationComponent implements OnInit {
       this.itemCount = this.titleList.length;
       this.videoRequestUrl = "video-request";
       this.dynamicFormsUrl = "dynamic-form";
+      this.dynamicSoruUrl = "dynamic-soru";
       this.generalEvalFormurl = "usergefd";
       this.generalInformationUrl =  "general-info";
       this.messageUrl ="message";

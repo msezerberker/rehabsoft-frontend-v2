@@ -23,6 +23,11 @@ export const userNavigation = [
     icon: 'paste'
   },
   {
+    text: 'Gönderilmiş Sorular',
+    path: '/user/dynamic-soru-request',
+    icon: 'paste'
+  },
+  {
     text: 'Görüşmeler',
     path: '/user/online-meeting/list',
     icon:"tel"

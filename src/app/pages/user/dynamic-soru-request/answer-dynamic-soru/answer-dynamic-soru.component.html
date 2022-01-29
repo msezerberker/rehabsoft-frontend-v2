@@ -1,0 +1,61 @@
+<div class="dx-fieldset" *ngFor="let item of dataSource">
+  <div class="dx-field" *ngIf="item.fieldType == 'METIN'">
+    <div class="dx-field-label-location-top">{{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-text-box
+        [showClearButton]="true"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-text-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'SAYISAL'" >
+    <div class="dx-field-label-location-top">{{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-number-box
+        [showSpinButtons]="true"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-number-box>
+    </div>
+  </div>
+  <div class="dx-field"  *ngIf="item.fieldType == 'EVET_HAYIR'">
+    <div class="dx-field-label-location-top"> {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-select-box
+        [items]="['EVET','HAYIR']"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-select-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'SECMELI'">
+    <div class="dx-field-label-location-top">{{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-select-box
+        [items]="defValueMap[item.id]"
+        [(value)]="answers[item.fieldOrder-1]">
+      </dx-select-box>
+    </div>
+  </div>
+  <div class="dx-field" *ngIf="item.fieldType == 'COKLU_SECMELI'">
+    <div class="dx-field-label-location-top"> {{item.fieldName}}</div>
+    <div class="dx-field-content-location-right" style="margin-top: 7px; max-width: 70%">
+      <dx-tag-box
+        [items]="defValueMap[item.id]"
+        [(value)]="answers[item.fieldOrder-1]"
+        placeholder="..."
+      ></dx-tag-box>
+    </div>
+  </div>
+</div>
+
+<div class="dx-field" style="margin-right: 60px">
+  <div class="dx-field-label"></div>
+  <div class="dx-field-value">
+    <dx-button icon="arrowright"
+               text="Cevapla"
+               (onClick)="btnClick()">
+    </dx-button>
+  </div>
+</div>
+
+
+<!-- [displayExpr]="displayExpr" -->

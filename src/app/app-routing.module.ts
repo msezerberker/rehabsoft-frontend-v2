@@ -23,7 +23,7 @@ import { AdminHomeComponent } from './pages/admin/home/admin-home.component';
 import { PagesComponent } from './pages/pages.component';
 import { SideNavOuterToolbarModule } from './layouts';
 import { NecessaryFormsComponent } from './pages/user/necessaryforms/necessary-forms.component';
-import { PatientinformationComponent } from "./pages/doctor/patientinformation/patientinformation.component"
+import { PatientinformationComponent } from './pages/doctor/patientinformation/patientinformation.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -128,6 +128,12 @@ import {SoruTemplatesComponent} from "./pages/doctor/soru-templates/soru-templat
 import {SoruViewTemplateComponent} from "./pages/doctor/soru-templates/soru-view-template/soru-view-template.component";
 import {SoruCreateTemplateComponent} from "./pages/doctor/soru-templates/soru-create-template/soru-create-template.component";
 import {SoruDefaultValueDatagridComponent} from "./pages/doctor/soru-templates/soru-create-template/soru-default-value-datagrid/soru-default-value-datagrid.component";
+import {DynamicSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/dynamic-soru.component";
+import {AssignSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/assign-soru/assign-soru.component";
+import {ViewSoruComponent} from "./pages/doctor/patientinformation/dynamic-soru/view-soru/view-soru.component";
+import {DynamicSoruRequestComponent} from "./pages/user/dynamic-soru-request/dynamic-soru-request.component";
+import {AnswerDynamicSoruComponent} from "./pages/user/dynamic-soru-request/answer-dynamic-soru/answer-dynamic-soru.component";
+import {ViewDynamicSoruComponent} from "./pages/user/dynamic-soru-request/view-dynamic-soru/view-dynamic-soru.component";
 
 
 
@@ -154,6 +160,9 @@ const routes: Routes = [
       { path: 'dynamic-form-request', component: DynamicFormRequestComponent},
       { path: 'answer-dynamic-form/:formID', component: AnswerDynamicFormComponent},
       { path: 'view-dynamic-form/:formID', component: ViewDynamicFormComponent},
+      { path: 'dynamic-soru-request', component: DynamicSoruRequestComponent},
+      { path: 'answer-dynamic-soru/:soruID', component: AnswerDynamicSoruComponent},
+      { path: 'view-dynamic-soru/:soruID', component: ViewDynamicSoruComponent},
       { path: 'online-meeting',
         canActivate: [AuthGuard],
         data: { roles: [Role.User]},
@@ -205,8 +214,11 @@ const routes: Routes = [
           { path: 'message', component: MessageComponent },
           { path: 'exercise-programs', component:ExerciseProgramsComponent},
           { path: 'dynamic-form', component: DynamicFormComponent},
+          { path: 'dynamic-soru', component: DynamicSoruComponent},
           { path: 'assign-form', component: AssignFormComponent},
+          { path: 'assign-soru', component: AssignSoruComponent},
           { path: 'view-form/:formID', component: ViewFormComponent },
+          { path: 'view-soru/:soruID', component: ViewSoruComponent },
           { path: 'meetings', component: MeetingsComponent }
         ]
       },
