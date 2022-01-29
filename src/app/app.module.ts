@@ -43,6 +43,10 @@ import { SoruTemplatesComponent } from './pages/doctor/soru-templates/soru-templ
 import { SoruCreateTemplateComponent } from './pages/doctor/soru-templates/soru-create-template/soru-create-template.component';
 import { SoruViewTemplateComponent } from './pages/doctor/soru-templates/soru-view-template/soru-view-template.component';
 import { SoruDefaultValueDatagridComponent } from './pages/doctor/soru-templates/soru-create-template/soru-default-value-datagrid/soru-default-value-datagrid.component';
+import { DynamicSoruComponent } from './pages/doctor/patientinformation/dynamic-soru/dynamic-soru.component';
+import { AssignSoruComponent } from './pages/doctor/patientinformation/dynamic-soru/assign-soru/assign-soru.component';
+import { ViewSoruComponent } from './pages/doctor/patientinformation/dynamic-soru/view-soru/view-soru.component';
+import { DefaultValueDataGridddComponent } from './pages/doctor/patientinformation/dynamic-soru/assign-soru/default-value-data-griddd/default-value-data-griddd.component';
 
 
 @NgModule({
@@ -51,7 +55,11 @@ import { SoruDefaultValueDatagridComponent } from './pages/doctor/soru-templates
     SoruTemplatesComponent,
     SoruCreateTemplateComponent,
     SoruViewTemplateComponent,
-    SoruDefaultValueDatagridComponent
+    SoruDefaultValueDatagridComponent,
+    DynamicSoruComponent,
+    AssignSoruComponent,
+    ViewSoruComponent,
+    DefaultValueDataGridddComponent
     ],
   imports: [
     BrowserModule,
