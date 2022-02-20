@@ -89,7 +89,18 @@ export class SoruTemplatesComponent implements OnInit {
               });
             },
             err => {
-              console.log('err: ', err);
+              console.log('err: ', err.status);
+                // @ts-ignore
+              swal.fire({
+                  title: 'Hata Oluştu !',
+                  text: 'Hastaya atanmış soru silinemez! ',
+                  type: 'error',
+                  heightAuto: false
+                }).then(() => {
+                  this.ngOnInit();
+                });
+                // this.router.navigate(['/login']);
+
               if (err instanceof HttpErrorResponse) {
                 if (err.status === 401) {
                   // @ts-ignore
@@ -101,16 +112,7 @@ export class SoruTemplatesComponent implements OnInit {
                   });
                   // this.router.navigate(['/login']);
                 }
-                if (err.status === 500) {
-                  // @ts-ignore
-                  swal.fire({
-                    title: 'Hata Oluştu !',
-                    text: 'Hastaya atanmış soru silinemez! ',
-                    type: 'error',
-                    heightAuto: true
-                  });
-                  // this.router.navigate(['/login']);
-                }
+
               }
             });
         }
