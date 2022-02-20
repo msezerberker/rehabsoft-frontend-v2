@@ -51,4 +51,8 @@ export class SoruDynamicService {
   answerTheSoru(assignedSoru: AssignedSoru, soruID: string){
     return this.http.post<any>(`${environment.API_BASE_PATH}/soru-dynamic/answer-the-soru/${soruID}`, assignedSoru);
   }
+
+  deleteById(id:number) {
+    return this.http.delete<string>(`${environment.API_BASE_PATH}/soru-dynamic/delete/${id}`);
+  }
 }
