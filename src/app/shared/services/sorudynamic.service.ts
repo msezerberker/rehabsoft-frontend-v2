@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {AssignedSoru} from '../../models/dynamicsoru/assignedsoru';
 import {SoruTemplate} from "../../models/dynamicsoru/sorutemplate";
+import {Exercise} from "../../models/exercise/exercise";
+import {SoruDynamic} from "../../models/dynamicsoru/sorudynamic";
 
 @Injectable({providedIn: 'root'})
 export class SoruDynamicService {
@@ -54,5 +56,11 @@ export class SoruDynamicService {
 
   deleteById(id:number) {
     return this.http.delete<string>(`${environment.API_BASE_PATH}/soru-dynamic/delete/${id}`);
+  }
+
+  update(soru:SoruDynamic){
+    const payload = new FormData();
+    payload.append('model', JSON.stringify(soru));
+    return this.http.post<SoruDynamic>(`${environment.API_BASE_PATH}/soru-dynamic/update`, payload );
   }
 }

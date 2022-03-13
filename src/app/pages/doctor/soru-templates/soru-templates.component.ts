@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TokenDto} from '../../../models/tokendto';
 import {AuthenticationService} from '../../../security/authentication.service';
 import {SoruDynamicService} from '../../../shared/services/sorudynamic.service';
@@ -7,6 +7,8 @@ import {SoruTemplate} from '../../../models/dynamicsoru/sorutemplate';
 import notify from 'devextreme/ui/notify';
 import swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
+import {SoruCreateTemplateComponent} from "./soru-create-template/soru-create-template.component";
+import {SoruDynamic} from "../../../models/dynamicsoru/sorudynamic";
 
 
 @Component({
@@ -16,9 +18,37 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SoruTemplatesComponent implements OnInit {
 
+   @ViewChild(SoruCreateTemplateComponent) soruCreateTemplateComponent: SoruCreateTemplateComponent;
+
+  isEditPopUp = false;
+  isVisible: boolean;
+  popUpContent: SoruDynamic;
+  isLoading: boolean;
+
+  popUpTitle = '';
+
   username: string;
   currentUser: TokenDto;
   soruTemplateList: SoruTemplate[];
+
+  cancelExercise = (Event) => {
+    this.closePopUp();
+  }
+
+
+  cancelButtonOption = {
+    text: 'Vazgeç',
+    onClick: (e)=>this.cancelExercise(e),
+    width: '130px',
+    type: 'outlined',
+  }
+  submitButtonOption = {
+    text: 'Kaydet',
+    onClick: (e)=>this.submitExercise(e),
+    width: '130px',
+    type: 'default',
+    icon:'fas fa-save',
+  }
 
   // tslint:disable-next-line:max-line-length
   constructor(private authenticationService: AuthenticationService, private dynamicSoruService: SoruDynamicService, private router: Router, route: ActivatedRoute) {
@@ -118,6 +148,64 @@ export class SoruTemplatesComponent implements OnInit {
         }
       });
 
+  }
+
+  editIconClick = (e: any) => {
+     this.soruCreateTemplateComponent.openPopUpForEdit(e.row.data);
+    this.popUpContent = {...e.row.data["soruDynamic"]};
+    this.popUpTitle = 'Soru Düzenleme';
+    this.isVisible = true;
+    this.isEditPopUp = true;
+    console.log(this.popUpContent.id);
+  }
+
+  submitExercise = (e: any) => {
+    this.isLoading = true;
+    // this.popUpContent.soruFieldCollection = this.popUpContent.soruFieldCollection.trim();
+    console.log(e)
+    if (this.isEditPopUp){ // if popup is opened to update exercise
+      this.dynamicSoruService.update(this.popUpContent).subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.closePopUp();
+          // @ts-ignore
+          swal.fire({
+            title: 'Başarılı !',
+            icon: 'success',
+            text: ' Soru Başarılı Bir Şekilde Güncellendi! ',
+            type: 'success',
+            heightAuto: false
+          }).then(() => {
+            this.ngOnInit();
+          });
+        },
+        err => {
+          this.isLoading = false;
+          console.log('err: ', err);
+          if (err instanceof HttpErrorResponse) {
+            // @ts-ignore
+            swal.fire({
+              title: 'Hata Oluştu !',
+              text: 'Güncelleme İşlemi Başarısız Oldu! ',
+              type: 'error',
+              heightAuto: false
+            });
+          } else{
+            // @ts-ignore
+            swal.fire({
+              title: 'Hata Oluştu !',
+              text: 'Güncelleme İşlemi Başarısız Oldu! ',
+              icon: 'error',
+              heightAuto: false
+            });
+          }
+        }
+      );
+    }
+  }
+
+  closePopUp = ()=>{
+    this.isVisible = false;
   }
 
 }

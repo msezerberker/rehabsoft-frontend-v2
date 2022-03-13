@@ -36,6 +36,7 @@
     <dxi-column dataField="soruDynamic.explanation" caption="Soru Açıklaması"></dxi-column>
     <dxi-column type="buttons" alignment="center"  width= '100px' >
       <dxi-button hint="Görüntüle" icon="fas fa-eye" [onClick]="viewSoru"></dxi-button>
+      <dxi-button hint="Düzenle" icon="edit" [visible]="true" [onClick]="editIconClick"></dxi-button>
       <dxi-button hint="Sil" icon="trash" [visible]="true" [onClick]="delIconClick"></dxi-button>
     </dxi-column>
 
